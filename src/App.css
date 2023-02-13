@@ -5,6 +5,7 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  display: flex;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -13,8 +14,24 @@
   }
 }
 
+.Drawer {
+}
+
+.Banner {
+  height: 2cm;
+  width: 100%;
+  background-color: rgba(31, 26, 36, 0.6);
+  position: absolute;
+  top: 0px;
+  left: 0px; 
+  display: flex;
+  align-items:center;
+  justify-content:space-evenly;
+  
+}
+
 .App-header {
-  background-color: #282c34;
+  background-color: #1f1a24;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
