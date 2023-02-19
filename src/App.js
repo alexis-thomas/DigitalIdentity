@@ -3,18 +3,23 @@ import "./App.css";
 import { MantineProvider, useMantineTheme } from "@mantine/core";
 import { useState } from "react";
 import { Drawer, Button, Group, Burger, NavLink } from "@mantine/core";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Bio from "./Bio";
+import Contact from "./Contact.js";
+import Banner from "./Banner";
+import Research from "./research";
+import Awards from "./Awards.js";
+import Resume from "./Resume";
 
 function App() {
-  const [opened, setOpened] = useState(true);
+  const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
   return (
     <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
       theme={{
         colorScheme: "dark",
         colors: {
-          // override dark colors to change them for all components
           dark: [
             "#d5d7e0",
             "#acaebf",
@@ -23,7 +28,7 @@ function App() {
             "#4d4f66",
             "#34354a",
             "#2b2c3d",
-            "#1d1e30",
+            "#28232d",
             "#0c0d21",
             "#01010a",
           ],
@@ -32,36 +37,34 @@ function App() {
     >
       <div className="App">
         <header className="App-header">
-          <div className="Banner">
-            <Burger
+          <BrowserRouter>
+            <div className="burger-container">
+              <Burger
+                color="white"
+                opened={opened}
+                onClick={() => setOpened((o) => !o)}
+              />
+            </div>
+            {/* <Banner /> */}
+            <Drawer
               opened={opened}
-              onClick={() => setOpened((o) => !o)}
-              title="test"
-            />
-            <div>Bio</div>
-            <div>Resume</div>
-            <div>Research & teaching</div>
-            <div>Awards</div>
-          </div>
-          <Button>Click me!</Button>
-          <Drawer
-            opened={opened}
-            overlayColor={
-              theme.colorScheme === "dark"
-                ? theme.colors.dark[9]
-                : theme.colors.gray[2]
-            }
-            onClose={() => setOpened(false)}
-            title="Register"
-            size="xl"
-            closeOnClickOutside={false}
-            className="Drawer"
-            trapFocus={false}
-            withOverlay={false}
-          >
-            <NavLink label="With icon" />
-          </Drawer>
-          <div>Bonjour je suis Nathan un jeune étudiant</div>
+              onClose={() => setOpened(false)}
+              padding="xl"
+              size="xl"
+              color="#28232d"
+            >
+              <Banner close={() => setOpened(false)} />
+            </Drawer>
+            <div className="main-view">
+              <Routes>
+                <Route exact path="/" element={<Bio />} />
+                <Route path="/research" element={<Research />} />
+                <Route path="/awards" element={<Awards />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/resume" element={<Resume />} />
+              </Routes>
+            </div>
+          </BrowserRouter>
         </header>
       </div>
     </MantineProvider>
