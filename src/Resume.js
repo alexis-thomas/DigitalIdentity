@@ -2,6 +2,16 @@ import { Timeline, Text, Title, Avatar } from "@mantine/core";
 
 function Resume() {
   var w = document.documentElement.clientWidth || window.innerWidth;
+  let experiences = [
+    {
+      name: "EDF R&D",
+      date: "sept. 2022 - dec. 2025",
+      description:
+        "Research scientist in Machine Learning applied to forecasting the French electricity load",
+      logo: "./assets/mines.png",
+    },
+  ];
+
   let formations = [
     {
       name: "Mines Paris",
@@ -33,6 +43,27 @@ function Resume() {
     },
   ];
 
+  let experiences_timelines = experiences.map((experience) => (
+    <Timeline.Item
+      bullet={
+        <Avatar
+          radius={w > 480 ? 70 : 60}
+          size={w > 480 ? 70 : 60}
+          src={require(`${experience.logo}`)}
+          variant="filled"
+        />
+      }
+      title={<CustomTitle text={experience.name} />}
+    >
+      <div style={{ paddingLeft: "2em", paddingBottom: "1em" }}>
+        <Text color="dimmed" size="sm">
+          {experience.date}
+        </Text>
+        <Text>{experience.description}</Text>
+      </div>
+    </Timeline.Item>
+  ));
+
   let formation_timelines = formations.map((formation) => (
     <Timeline.Item
       bullet={
@@ -57,13 +88,26 @@ function Resume() {
   return (
     <div className="resume">
       <div style={{ paddingBottom: "1.5em" }}>
-        <Text size={30} weight={700} color="">
+        <Text size={30} weight={700} color="" className="section-container">
+          Work experience
+        </Text>
+      </div>
+      <Timeline active={4} lineWidth={2} bulletSize={w > 480 ? 70 : 60}>
+        {experiences_timelines}
+      </Timeline>
+      <div style={{ paddingBottom: "1.5em", paddingTop: "1.5em" }}>
+        <Text size={30} weight={700} color="" className="section-container">
           Education
         </Text>
       </div>
       <Timeline active={4} lineWidth={2} bulletSize={w > 480 ? 70 : 60}>
         {formation_timelines}
       </Timeline>
+      <div style={{ paddingBottom: "1.5em", paddingTop: "1.5em" }}>
+        <Text size={30} weight={700} color="" className="section-container">
+          Certificates
+        </Text>
+      </div>
     </div>
   );
 }
