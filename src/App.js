@@ -13,7 +13,7 @@ import Awards from "./Awards.js";
 import Resume from "./Resume";
 
 function App() {
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = useState(true);
   const theme = useMantineTheme();
   return (
     <MantineProvider
@@ -52,6 +52,8 @@ function App() {
               padding="xl"
               size="xl"
               color="#28232d"
+              withOverlay={false}
+              trapFocus={false}
             >
               <Banner close={() => setOpened(false)} />
             </Drawer>
