@@ -5,11 +5,12 @@ import { useState } from "react";
 import { Drawer, Button, Group, Burger, NavLink } from "@mantine/core";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Awards from "./Awards.js";
+import Banner from "./Banner";
 import Bio from "./Bio";
 import Contact from "./Contact.js";
-import Banner from "./Banner";
+import Footer from "./Footer.js";
 import Research from "./research";
-import Awards from "./Awards.js";
 import Resume from "./Resume";
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
               </Routes>
             </div>
           </BrowserRouter>
+          <Footer></Footer>
         </header>
       </div>
     </MantineProvider>

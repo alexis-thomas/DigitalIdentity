@@ -22,6 +22,7 @@ a {
   margin: 5% 5%;
   width: 90%; /* fallback for small screens */
   align-self: center;
+  flex:1;
 }
 
 @media screen and (min-width: 768px) { /* adjust the minimum width as needed */
