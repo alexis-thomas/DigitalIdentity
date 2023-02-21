@@ -98,6 +98,9 @@ a {
   padding-top: 1em;
   padding-left: 1em;
   align-self: flex-start ;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
 }
 
 .resume {
@@ -114,4 +117,15 @@ padding-left: 2em;
 
 .section-container {
  text-align: center;
+}
+
+.card-container {
+  padding: 1em;
+  width: 25em;
+}
+
+.research {
+  display: flex;
+  flex: "row";
+  flex-wrap: wrap;
 }
