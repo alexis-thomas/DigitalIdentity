@@ -121,11 +121,11 @@ padding-left: 2em;
 
 .card-container {
   padding: 1em;
-  width: 25em;
+  display: flex;
+  flex-direction: row;
 }
 
 .research {
   display: flex;
-  flex: "row";
-  flex-wrap: wrap;
+  flex-direction: column;
 }
