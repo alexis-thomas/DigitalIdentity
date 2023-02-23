@@ -19,15 +19,15 @@ a {
 }
 
 .main-view {
-  margin: 5% 5%;
+  margin: 2% 0;
   width: 90%; /* fallback for small screens */
   align-self: center;
   flex:1;
 }
 
-@media screen and (min-width: 768px) { /* adjust the minimum width as needed */
+@media screen and (min-width: 1280px) { /* adjust the minimum width as needed */
   .main-view {
-    margin: 5% 5%;
+    margin: 2% 0;
     width: 50%;
   }
 }
@@ -120,12 +120,79 @@ padding-left: 2em;
 }
 
 .card-container {
-  padding: 1em;
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
+  background-color: #28232d;
+  border-radius: 1em;
+  margin: 1em 0;
+  cursor: pointer;
+  overflow: hidden;
 }
 
 .research {
   display: flex;
   flex-direction: column;
+
+}
+
+.article-image {
+  width: 100%;
+  
+}
+
+.article-image-container {
+  height: 6em;
+  overflow: hidden;
+  place-self: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .article-image-container{
+    height: 10em;
+}
+}
+
+.article-title {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.article-text {
+  text-align: left;
+  padding-left: 1em;  
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+@media only screen and (min-width: 768px) {
+  .article-text{
+    grid-template-rows: 0.5fr 1fr 2fr 1fr;
+}
+}
+
+.article-description {
+  display:none;
+}
+
+@media only screen and (min-width: 768px) {
+  .article-description {
+    display:block;
+  }
+}
+
+.article-button {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .article-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.article-date {
+  font-size: small;
+  color: #a9a9a9;
 }
