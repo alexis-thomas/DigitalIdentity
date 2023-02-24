@@ -8,7 +8,7 @@ function Resume() {
       date: "sept. 2022 - dec. 2025",
       description:
         "Research scientist in Machine Learning applied to forecasting the French electricity load",
-      logo: "./assets/mines.png",
+      logo: "./assets/edf.jpg",
     },
   ];
 
@@ -32,16 +32,25 @@ function Resume() {
       date: "janv. 2018 - sept. 2022",
       description:
         "Master's Degree in Science and Executive Engineering, Computer Science",
-      logo: "./assets/mines.png",
+      logo: "./assets/llg.jpg",
     },
     {
       name: "SL",
       date: "janv. 2018 - sept. 2022",
       description:
         "Master's Degree in Science and Executive Engineering, Computer Science",
-      logo: "./assets/mines.png",
+      logo: "./assets/saint_louis.webp",
     },
   ];
+
+  let certificates = [
+    {
+      name: "AWS Certified Solutions Architect - Associate",
+      date: "feb. 2023",
+      description: "Certifies the ability to strategically design well-architected distributed systems that are scalable, resilient, efficient, and fault-tolerant.",
+      logo: "./assets/aws_certificate.png",
+    }
+  ]
 
   let experiences_timelines = experiences.map((experience) => (
     <Timeline.Item
@@ -85,6 +94,28 @@ function Resume() {
     </Timeline.Item>
   ));
 
+  let certificates_timelines = certificates.map((certificate) => (
+    <Timeline.Item
+      bullet={
+        <Avatar
+          radius={w > 480 ? 70 : 60}
+          size={w > 480 ? 70 : 60}
+          src={require(`${certificate.logo}`)}
+          variant="filled"
+        />
+      }
+      title={<CustomTitle text={certificate.name} />}
+    >
+      <div style={{ paddingLeft: "2em", paddingBottom: "1em" }}>
+        <Text color="dimmed" size="sm">
+          {certificate.date}
+        </Text>
+        <Text>{certificate.description}</Text>
+      </div>
+
+    </Timeline.Item>
+  ));
+
   return (
     <div className="resume">
       <div style={{ paddingBottom: "1.5em" }}>
@@ -108,6 +139,9 @@ function Resume() {
           Certificates
         </Text>
       </div>
+      <Timeline active={4} lineWidth={2} bulletSize={w > 480 ? 70 : 60}>
+        {certificates_timelines}
+      </Timeline>
     </div>
   );
 }
