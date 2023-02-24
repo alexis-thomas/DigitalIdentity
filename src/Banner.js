@@ -5,6 +5,8 @@ import { useLocation } from "react-router-dom";
 
 // simple React function for banner
 function Banner(props) {
+  let w = document.documentElement.clientWidth || window.innerWidth;
+  let mobile = w > 480 ? false : true;
 
   const icons = [
     IconHome,
@@ -39,7 +41,7 @@ function Banner(props) {
       //   >
       //     <div className="banner-button">{page.name}</div>
       //   </Link>
-             <Link to={page.path} style={{ textDecoration: "none" }}>
+             <Link onClick={() => {if (mobile) {props.close()}}} to={page.path} style={{ textDecoration: "none" }}>
                <NavLink  label={<Text size={"lg"}>{page.name}</Text>} icon={<Icon size={25} />} active={location.pathname.slice(location.pathname.lastIndexOf("/")) === page.path}/>
                </Link>)
 })}

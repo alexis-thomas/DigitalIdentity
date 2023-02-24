@@ -14,7 +14,10 @@ import Research from "./research";
 import Resume from "./Resume";
 
 function App() {
-  const [opened, setOpened] = useState(false);
+  var w = document.documentElement.clientWidth || window.innerWidth;
+  let mobile = w > 480 ? false : true;
+
+  const [opened, setOpened] = useState(!mobile);
   const theme = useMantineTheme();
   return (
     <MantineProvider

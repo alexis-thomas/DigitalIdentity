@@ -2,4 +2,6 @@
     min-height:50px
 }
 
-.footer__content{}
+.footer__content{
+    font-size: small;
+}
