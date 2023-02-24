@@ -1,46 +1,48 @@
 import { Link } from "react-router-dom";
+import { IconHome, IconSchool, IconNews, IconAward, IconAddressBook } from '@tabler/icons-react';
+import { NavLink, Text } from "@mantine/core";
+import { useLocation } from "react-router-dom";
 
 // simple React function for banner
 function Banner(props) {
+
+  const icons = [
+    IconHome,
+    IconSchool,
+    IconNews,
+    IconAward,
+    IconAddressBook
+
+];
+
+  let pages = [
+    {name: "Bio", path: "/"},
+    {name: "Resume", path: "/resume"},
+    {name: "Research & teaching", path: "/research"},
+    {name: "Awards", path: "/awards"},
+    {name: "Contact", path: "/contact"}
+  ]
+
+  const location = useLocation();
+
   return (
+    
     <div className="Banner">
-      <Link
-        style={{ textDecoration: "none" }}
-        to="/"
-        onClick={() => props.close()}
-      >
-        <div className="banner-button">Bio</div>
-      </Link>
-      <Link
-        style={{ textDecoration: "none" }}
-        to="/resume"
-        onClick={() => props.close()}
-      >
-        <div className="banner-button">Resume</div>
-      </Link>
-      <div className="banner-button">
-        <Link
-          style={{ textDecoration: "none" }}
-          to="/research"
-          onClick={() => props.close()}
-        >
-          Research & teaching
-        </Link>
-      </div>
-      <Link
-        style={{ textDecoration: "none" }}
-        to="/awards"
-        onClick={() => props.close()}
-      >
-        <div className="banner-button">Awards</div>
-      </Link>
-      <Link
-        style={{ textDecoration: "none" }}
-        to="/contact"
-        onClick={() => props.close()}
-      >
-        <div className="banner-button">Contact</div>
-      </Link>
+      {pages.map((page) => {
+        const Icon = icons[pages.indexOf(page)];
+       return( 
+
+      //  <Link
+      //     style={{ textDecoration: "none" }}
+      //     to={page.path}
+      //     onClick={() => props.close()}
+      //   >
+      //     <div className="banner-button">{page.name}</div>
+      //   </Link>
+             <Link to={page.path} style={{ textDecoration: "none" }}>
+               <NavLink  label={<Text size={"lg"}>{page.name}</Text>} icon={<Icon size={25} />} active={location.pathname.slice(location.pathname.lastIndexOf("/")) === page.path}/>
+               </Link>)
+})}
     </div>
   );
 }
