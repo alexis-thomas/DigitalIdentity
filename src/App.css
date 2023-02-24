@@ -127,6 +127,10 @@ padding-left: 2em;
   margin: 1em 0;
   cursor: pointer;
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 10em;
 }
 
 .research {
@@ -135,64 +139,62 @@ padding-left: 2em;
 
 }
 
-.article-image {
-  width: 100%;
-  
-}
 
 .article-image-container {
-  height: 6em;
+  width: 30%;
   overflow: hidden;
-  place-self: center;
+  background-size: cover; background-position: center; Background-repeat: no-repeat  
 }
 
-@media only screen and (min-width: 768px) {
-  .article-image-container{
-    height: 10em;
-}
-}
 
 .article-title {
   font-weight: bold;
-  font-size: larger;
+  font-size: large;
+
 }
 
 .article-text {
-  text-align: left;
-  padding-left: 1em;  
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+  height: 70%;
 }
 
-@media only screen and (min-width: 768px) {
-  .article-text{
-    grid-template-rows: 0.5fr 1fr 2fr 1fr;
-}
+.article-right-side {
+  text-align: left;
+  padding: 0.3em 0.3em 0 1em;
+  width: 70%;
 }
 
 .article-description {
+  padding-top: 1em;
   display:none;
-}
-
-@media only screen and (min-width: 768px) {
-  .article-description {
-    display:block;
-  }
 }
 
 .article-button {
   display: none;
 }
 
+.article-journal {
+  padding-top: 1em;
+}
+
 @media only screen and (min-width: 768px) {
+  .card-container {
+    height: 15em;
+  }
   .article-button {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+  .article-description {
+    display:block;
+  }
+  .article-title {
+    font-size: larger;
+
+  }
 }
 
 .article-date {
-  font-size: small;
   color: #a9a9a9;
+  padding-top: 0.5em;
 }

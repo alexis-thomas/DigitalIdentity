@@ -14,7 +14,7 @@ import Research from "./research";
 import Resume from "./Resume";
 
 function App() {
-  const [opened, setOpened] = useState(true);
+  const [opened, setOpened] = useState(false);
   const theme = useMantineTheme();
   return (
     <MantineProvider
@@ -51,7 +51,7 @@ function App() {
               opened={opened}
               onClose={() => setOpened(false)}
               padding="xl"
-              size="xl"
+              size="md"
               color="#28232d"
               withOverlay={false}
               trapFocus={false}

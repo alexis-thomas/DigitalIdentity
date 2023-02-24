@@ -8,6 +8,7 @@ import {
 import { IconContext } from "react-icons";
 import Photo from "./assets/nathou.jpeg";
 
+
 // React function for biography
 function Bio() {
   return (
