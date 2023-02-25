@@ -9,7 +9,7 @@
 }
 
 a {
-  color: #FFF;
+  color: #fff;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -22,10 +22,11 @@ a {
   margin: 2% 0;
   width: 90%; /* fallback for small screens */
   align-self: center;
-  flex:1;
+  flex: 1;
 }
 
-@media screen and (min-width: 1280px) { /* adjust the minimum width as needed */
+@media screen and (min-width: 1280px) {
+  /* adjust the minimum width as needed */
   .main-view {
     margin: 2% 0;
     width: 50%;
@@ -66,7 +67,7 @@ a {
 }
 
 .banner-button {
-  cursor:pointer;
+  cursor: pointer;
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -97,7 +98,7 @@ a {
 .burger-container {
   padding-top: 1em;
   padding-left: 1em;
-  align-self: flex-start ;
+  align-self: flex-start;
   position: sticky;
   top: 0px;
   z-index: 1;
@@ -112,11 +113,11 @@ a {
 }
 
 .title-container {
-padding-left: 2em;
+  padding-left: 2em;
 }
 
 .section-container {
- text-align: center;
+  text-align: center;
 }
 
 .card-container {
@@ -133,39 +134,59 @@ padding-left: 2em;
   height: 10em;
 }
 
+.article-container {
+  background-color: #28232dc0;
+  border-radius: 1em;
+  margin: 0.5em 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  padding: 1em;
+  justify-content: space-between;
+}
+
+.article-container:hover {
+  background-color: #393241;
+}
+
 .research {
   display: flex;
   flex-direction: column;
-
 }
-
 
 .article-image-container {
   width: 30%;
   overflow: hidden;
-  background-size: cover; background-position: center; Background-repeat: no-repeat  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-
 
 .article-title {
   font-weight: bold;
   font-size: large;
-
 }
 
 .article-text {
-  height: 70%;
+}
+
+.article-left-side {
+  text-align: left;
+  padding-left: 0.3em;
 }
 
 .article-right-side {
-  text-align: left;
-  padding: 0.3em 0.3em 0 1em;
-  width: 70%;
+  margin-left: 1em;
+  padding-right: 1em;
+  display: flex;
+  gap: 1em;
 }
 
 .article-description {
   padding-top: 1em;
-  display:none;
+  display: none;
 }
 
 .article-button {
@@ -186,15 +207,14 @@ padding-left: 2em;
     align-items: center;
   }
   .article-description {
-    display:block;
+    display: block;
   }
   .article-title {
     font-size: larger;
-
   }
 }
 
 .article-date {
   color: #a9a9a9;
-  padding-top: 0.5em;
+  padding-top: 0.1em;
 }
