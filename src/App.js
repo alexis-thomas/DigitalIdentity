@@ -12,6 +12,7 @@ import Contact from "./Contact.js";
 import Footer from "./Footer.js";
 import Research from "./research";
 import Resume from "./Resume";
+import Articles from "./Articles";
 
 function App() {
   var w = document.documentElement.clientWidth || window.innerWidth;
@@ -65,6 +66,7 @@ function App() {
               <Routes>
                 <Route exact path="/" element={<Bio />} />
                 <Route path="/research" element={<Research />} />
+                <Route path="/articles" element={<Articles />} />
                 <Route path="/awards" element={<Awards />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/resume" element={<Resume />} />

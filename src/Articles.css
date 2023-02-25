@@ -1,0 +1,84 @@
+.title-container {
+  padding-left: 2em;
+}
+
+.section-container {
+  text-align: center;
+}
+
+.card-container {
+  /* display: flex;
+  flex-direction: row; */
+  background-color: #28232d;
+  border-radius: 1em;
+  margin: 1em 0;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 10em;
+}
+
+.research {
+  display: flex;
+  flex-direction: column;
+}
+
+.article-image-container {
+  width: 30%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.article-title {
+  font-weight: bold;
+  font-size: large;
+}
+
+.article-text {
+  height: 70%;
+}
+
+.article-right-side {
+  text-align: left;
+  padding: 0.3em 0.3em 0 1em;
+  width: 70%;
+}
+
+.article-description {
+  padding-top: 1em;
+  display: none;
+}
+
+.article-button {
+  display: none;
+}
+
+.article-journal {
+  padding-top: 1em;
+}
+
+@media only screen and (min-width: 768px) {
+  .card-container {
+    height: 15em;
+  }
+  .article-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .article-description {
+    display: block;
+  }
+  .article-title {
+    font-size: larger;
+  }
+}
+
+.article-date {
+  color: #a9a9a9;
+  padding-top: 0.5em;
+}

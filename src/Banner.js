@@ -1,5 +1,12 @@
 import { Link } from "react-router-dom";
-import { IconHome, IconSchool, IconNews, IconAward, IconAddressBook } from '@tabler/icons-react';
+import {
+  IconHome,
+  IconSchool,
+  IconNews,
+  IconAward,
+  IconAddressBook,
+  IconArticle,
+} from "@tabler/icons-react";
 import { NavLink, Text } from "@mantine/core";
 import { useLocation } from "react-router-dom";
 
@@ -12,39 +19,54 @@ function Banner(props) {
     IconHome,
     IconSchool,
     IconNews,
+    IconArticle,
     IconAward,
-    IconAddressBook
-
-];
+    IconAddressBook,
+  ];
 
   let pages = [
-    {name: "Bio", path: "/"},
-    {name: "Resume", path: "/resume"},
-    {name: "Research & teaching", path: "/research"},
-    {name: "Awards", path: "/awards"},
-    {name: "Contact", path: "/contact"}
-  ]
+    { name: "Bio", path: "/" },
+    { name: "Resume", path: "/resume" },
+    { name: "Research & teaching", path: "/research" },
+    { name: "Articles", path: "/articles" },
+    { name: "Awards", path: "/awards" },
+    { name: "Contact", path: "/contact" },
+  ];
 
   const location = useLocation();
 
   return (
-    
     <div className="Banner">
       {pages.map((page) => {
         const Icon = icons[pages.indexOf(page)];
-       return( 
-
-      //  <Link
-      //     style={{ textDecoration: "none" }}
-      //     to={page.path}
-      //     onClick={() => props.close()}
-      //   >
-      //     <div className="banner-button">{page.name}</div>
-      //   </Link>
-             <Link onClick={() => {if (mobile) {props.close()}}} to={page.path} style={{ textDecoration: "none" }}>
-               <NavLink  label={<Text size={"lg"}>{page.name}</Text>} icon={<Icon size={25} />} active={location.pathname.slice(location.pathname.lastIndexOf("/")) === page.path}/>
-               </Link>)
-})}
+        return (
+          //  <Link
+          //     style={{ textDecoration: "none" }}
+          //     to={page.path}
+          //     onClick={() => props.close()}
+          //   >
+          //     <div className="banner-button">{page.name}</div>
+          //   </Link>
+          <Link
+            onClick={() => {
+              if (mobile) {
+                props.close();
+              }
+            }}
+            to={page.path}
+            style={{ textDecoration: "none" }}
+          >
+            <NavLink
+              label={<Text size={"lg"}>{page.name}</Text>}
+              icon={<Icon size={25} />}
+              active={
+                location.pathname.slice(location.pathname.lastIndexOf("/")) ===
+                page.path
+              }
+            />
+          </Link>
+        );
+      })}
     </div>
   );
 }

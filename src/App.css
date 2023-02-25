@@ -134,7 +134,7 @@ a {
   height: 10em;
 }
 
-.article-container {
+.research-container {
   background-color: #28232dc0;
   border-radius: 1em;
   margin: 0.5em 0;
@@ -147,7 +147,7 @@ a {
   justify-content: space-between;
 }
 
-.article-container:hover {
+.research-container:hover {
   background-color: #393241;
 }
 
@@ -156,7 +156,7 @@ a {
   flex-direction: column;
 }
 
-.article-image-container {
+.research-image-container {
   width: 30%;
   overflow: hidden;
   background-size: cover;
@@ -164,36 +164,36 @@ a {
   background-repeat: no-repeat;
 }
 
-.article-title {
+.research-title {
   font-weight: bold;
   font-size: large;
 }
 
-.article-text {
+.research-text {
 }
 
-.article-left-side {
+.research-left-side {
   text-align: left;
   padding-left: 0.3em;
 }
 
-.article-right-side {
+.research-right-side {
   margin-left: 1em;
   padding-right: 1em;
   display: flex;
   gap: 1em;
 }
 
-.article-description {
+.research-description {
   padding-top: 1em;
   display: none;
 }
 
-.article-button {
+.research-button {
   display: none;
 }
 
-.article-journal {
+.research-journal {
   padding-top: 1em;
 }
 
@@ -201,20 +201,61 @@ a {
   .card-container {
     height: 15em;
   }
-  .article-button {
+  .research-button {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .article-description {
+  .research-description {
     display: block;
   }
-  .article-title {
+  .research-title {
     font-size: larger;
   }
 }
 
-.article-date {
+.research-date {
   color: #a9a9a9;
   padding-top: 0.1em;
+}
+
+.skills {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  margin-top: 2em;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(3, auto);
+}
+
+.skill {
+  position: relative;
+  display: flex;
+  height: 4em;
+  width: 4em;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.skill::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  border-radius: 20%;
+  padding: 2px;
+  background: linear-gradient(45deg, indigo, cyan);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.footer {
+  margin-top: 2em;
+}
+
+.bio-paragraph {
+  text-align: justify;
+  text-justify: auto;
 }

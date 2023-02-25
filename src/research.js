@@ -91,15 +91,15 @@ function Research() {
 
 function Article(props) {
   return (
-    <div className="article-container">
-      <div className="article-left-side">
-        <div className="article-title">{props.title}</div>
-        <div className="article-date">
+    <div className="research-container">
+      <div className="research-left-side">
+        <div className="research-title">{props.title}</div>
+        <div className="research-date">
           {"  "}
           {props.authors.join(", ")} ({props.date}) in <i>{props.journal}</i>
         </div>
       </div>
-      <div className="article-right-side">
+      <div className="research-right-side">
         {props.lienGithub ? (
           <a target="_blank" href={props.lienGithub}>
             <SiGithub size={30} />
@@ -117,15 +117,15 @@ function Article(props) {
 
 function Talk(props) {
   return (
-    <div className="article-container">
-      <div className="article-left-side">
-        <div className="article-title">{props.title}</div>
-        <div className="article-date">
+    <div className="research-container">
+      <div className="research-left-side">
+        <div className="research-title">{props.title}</div>
+        <div className="research-date">
           {"  "}
           <i>{props.conf}</i> ({props.date}), {props.place}
         </div>
       </div>
-      <div className="article-right-side">
+      <div className="research-right-side">
         {props.lienConf ? (
           <a target="_blank" href={props.lienConf}>
             <IconLink size={30} />
@@ -143,14 +143,14 @@ function Talk(props) {
 
 function Teaching(props) {
   return (
-    <div className="article-container">
-      <div className="article-left-side">
-        <div className="article-title">{props.title}</div>
-        <div className="article-date">
+    <div className="research-container">
+      <div className="research-left-side">
+        <div className="research-title">{props.title}</div>
+        <div className="research-date">
           {props.level} ({props.date}), <i>{props.place}</i>
         </div>
       </div>
-      <div className="article-right-side">
+      <div className="research-right-side">
         {props.lienConf ? (
           <a target="_blank" href={props.lienConf}>
             <IconLink size={30} />
