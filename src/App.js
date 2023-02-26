@@ -59,6 +59,8 @@ function App() {
               color="#28232d"
               withOverlay={false}
               trapFocus={false}
+              closeOnEscape={false}
+              lockScroll={false}
             >
               <Banner close={() => setOpened(false)} />
             </Drawer>
