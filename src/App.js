@@ -4,7 +4,7 @@ import { MantineProvider, useMantineTheme } from "@mantine/core";
 import { useState } from "react";
 import { Drawer, Button, Group, Burger, NavLink } from "@mantine/core";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Awards from "./Awards.js";
 import Banner from "./Banner";
 import Bio from "./Bio";
@@ -42,7 +42,7 @@ function App() {
     >
       <div className="App">
         <header className="App-header">
-          <BrowserRouter>
+          <HashRouter>
             <div className="burger-container">
               <Burger
                 color="white"
@@ -72,7 +72,7 @@ function App() {
                 <Route path="/resume" element={<Resume />} />
               </Routes>
             </div>
-          </BrowserRouter>
+          </HashRouter>
           <Footer></Footer>
         </header>
       </div>
