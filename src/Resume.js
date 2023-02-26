@@ -1,4 +1,4 @@
-import { Timeline, Text, Title, Avatar, List } from "@mantine/core";
+import { Timeline, Text, Title, Avatar, List, Spoiler } from "@mantine/core";
 
 function Resume() {
   var w = document.documentElement.clientWidth || window.innerWidth;
@@ -113,34 +113,38 @@ function Resume() {
             <Text color="dimmed" size="sm">
               {experience.date}
             </Text>
-            {Array.isArray(experience.description) ? (
-              <List listStyleType="disc">
-                {experience.description.map((item) => (
-                  <List.Item>{item}</List.Item>
-                ))}
-              </List>
-            ) : (
-              <Text>{experience.description}</Text>
-            )}
+            <Spoiler maxHeight={0} showLabel="Show more" hideLabel="Hide">
+              {Array.isArray(experience.description) ? (
+                <List listStyleType="disc">
+                  {experience.description.map((item) => (
+                    <List.Item>{item}</List.Item>
+                  ))}
+                </List>
+              ) : (
+                <Text>{experience.description}</Text>
+              )}
+            </Spoiler>
           </div>
         </Timeline.Item>,
 
         experience.steps.map((step) => (
-          <Timeline.Item lineVariant="dotted">
+          <Timeline.Item lineVariant="dotted" bulletSize={25}>
             <div style={{ paddingLeft: "2em", paddingBottom: "1em" }}>
               <Title order={5}>{experience.job}</Title>
               <Text color="dimmed" size="sm">
                 {step.date}
               </Text>
-              {Array.isArray(step.description) ? (
-                <List listStyleType="disc">
-                  {step.description.map((item) => (
-                    <List.Item>{item}</List.Item>
-                  ))}
-                </List>
-              ) : (
-                <Text>{step.description}</Text>
-              )}
+              <Spoiler maxHeight={0} showLabel="Show more" hideLabel="Hide">
+                {Array.isArray(step.description) ? (
+                  <List listStyleType="disc">
+                    {step.description.map((item) => (
+                      <List.Item>{item}</List.Item>
+                    ))}
+                  </List>
+                ) : (
+                  <Text>{step.description}</Text>
+                )}
+              </Spoiler>
             </div>
           </Timeline.Item>
         )),
@@ -228,7 +232,12 @@ function Resume() {
           Work experience
         </Text>
       </div>
-      <Timeline color="gray" active={4} lineWidth={4}>
+      <Timeline
+        color="gray"
+        active={4}
+        lineWidth={4}
+        bulletSize={w > 480 ? 70 : 60}
+      >
         {experiences_timelines}
       </Timeline>
       <div style={{ paddingBottom: "1.5em", paddingTop: "1.5em" }}>

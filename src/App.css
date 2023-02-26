@@ -98,12 +98,17 @@ a {
 }
 
 .burger-container {
-  padding-top: 1em;
+  padding-top: 0.5em;
   padding-left: 1em;
+  padding-bottom: 0.5em;
   align-self: flex-start;
+  display: flex;
+  flex-direction: row;
   position: sticky;
   top: 0px;
   z-index: 1;
+  background-color: #1f1a24;
+  width: 100%;
 }
 
 .resume {
