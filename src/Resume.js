@@ -108,18 +108,24 @@ function Resume() {
           bullet={<Logo src={experience.logo} />}
           title={<CustomTitle text={experience.name} />}
         >
-          <div style={{ paddingLeft: "2em", paddingBottom: "1em" }}>
+          <div
+            style={{
+              paddingLeft: "2em",
+              paddingBottom: "1em",
+              boxSizing: "border-box",
+            }}
+          >
             <Title order={5}>{experience.job}</Title>
             <Text color="dimmed" size="sm">
               {experience.date}
             </Text>
             <Spoiler maxHeight={0} showLabel="Show more" hideLabel="Hide">
               {Array.isArray(experience.description) ? (
-                <List listStyleType="disc">
+                <div className="descriptions">
                   {experience.description.map((item) => (
-                    <List.Item>{item}</List.Item>
+                    <div>{item}</div>
                   ))}
-                </List>
+                </div>
               ) : (
                 <Text>{experience.description}</Text>
               )}
@@ -136,11 +142,11 @@ function Resume() {
               </Text>
               <Spoiler maxHeight={0} showLabel="Show more" hideLabel="Hide">
                 {Array.isArray(step.description) ? (
-                  <List listStyleType="disc">
+                  <div className="descriptions">
                     {step.description.map((item) => (
-                      <List.Item>{item}</List.Item>
+                      <div>{item}</div>
                     ))}
-                  </List>
+                  </div>
                 ) : (
                   <Text>{step.description}</Text>
                 )}
