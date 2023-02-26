@@ -20,21 +20,25 @@ function Awards() {
       date: "2017",
       rank: "Bronze medal",
       description:
-        "Master's Degree in Science and Executive Engineering, Computer Science",
+        "International challenge in both theoretical and experimental Physics for undergraduate students which held in Yogyakarta, Indonesia.",
     },
     {
       name: "Concours Général des Lycées",
+      linkName:
+        "https://www.education.gouv.fr/le-concours-general-des-lycees-et-des-metiers-un-prix-d-excellence-10022",
       date: "2016",
       rank: "Mention in Physics and Chemistry",
       description:
-        "Master's Degree in Science and Executive Engineering, Computer Science",
+        "French national challenge in theoretical Physics and Chemistry organized by the French Ministry of Education for highscool students.",
     },
     {
       name: "Local Mathematics Olympiads",
       date: "2015",
       rank: "Rank 1",
       description:
-        "Master's Degree in Science and Executive Engineering, Computer Science",
+        "French challenge in Mathematics organized by the French Ministry of Education and by the Animath association at the scale of the Académie de Nice for highscool students.",
+      linkName:
+        "https://www.pedagogie.ac-nice.fr/mathematiques/category/culture-mathematique/rallyes-et-concours/olympiades/",
     },
   ];
 

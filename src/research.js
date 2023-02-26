@@ -28,7 +28,7 @@ function Research() {
 
   let talks = [
     {
-      title: "Signed Taylor Expansion and applications to machine learning",
+      title: "Signed Taylor expansion and applications to machine learning",
       date: "2021",
       conf: "GDR TRAG - Signatures and rough paths for machine learning",
       place: "Institut Henri Poincaré - Paris- France",
