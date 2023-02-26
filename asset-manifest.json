@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/digital-identity/static/css/main.da29775e.css",
+    "main.js": "/digital-identity/static/js/main.33cc11b9.js",
+    "static/js/787.745a6537.chunk.js": "/digital-identity/static/js/787.745a6537.chunk.js",
+    "static/media/smdc.jpg": "/digital-identity/static/media/smdc.53e52b4806e9c81d7294.jpg",
+    "static/media/saint_louis.webp": "/digital-identity/static/media/saint_louis.4bc4c711b555d84bfb67.webp",
+    "static/media/aws_certificate.png": "/digital-identity/static/media/aws_certificate.22576f263fbae6620043.png",
+    "static/media/mines.png": "/digital-identity/static/media/mines.a6837e42f939e993942c.png",
+    "static/media/nathou.jpeg": "/digital-identity/static/media/nathou.b74670337d2409983638.jpeg",
+    "static/media/ulm.jpg": "/digital-identity/static/media/ulm.f867889df897cc869a2b.jpg",
+    "static/media/edf.jpg": "/digital-identity/static/media/edf.995b161e35dbbe8ba7f7.jpg",
+    "static/media/ipho.jpeg": "/digital-identity/static/media/ipho.c13cf98cadf2c7fda5c5.jpeg",
+    "static/media/sql.svg": "/digital-identity/static/media/sql.3df7b3c65180efc3b672b26b9391beab.svg",
+    "static/media/aws.svg": "/digital-identity/static/media/aws.482ae98bd199aa096dfaa67074122abb.svg",
+    "static/media/linux.svg": "/digital-identity/static/media/linux.34c9ff73a5e385a4428dda4d536c4922.svg",
+    "static/media/react.svg": "/digital-identity/static/media/react.9342c38419495e33d129b6e97166cd00.svg",
+    "static/media/logo.svg": "/digital-identity/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/docker.svg": "/digital-identity/static/media/docker.c49ffb5c2e6d11bfae9683eefe8cdedc.svg",
+    "static/media/java.svg": "/digital-identity/static/media/java.5386b56c3206b6bd70b1053534d73dc3.svg",
+    "static/media/python.svg": "/digital-identity/static/media/python.026a62687ef705a39cfc755d7457859c.svg",
+    "index.html": "/digital-identity/index.html",
+    "static/media/git.svg": "/digital-identity/static/media/git.43d387b77657117c0e407816cbf72476.svg",
+    "static/media/typescript.svg": "/digital-identity/static/media/typescript.f20748caf2dac55710ddeed71de0bac4.svg",
+    "main.da29775e.css.map": "/digital-identity/static/css/main.da29775e.css.map",
+    "main.33cc11b9.js.map": "/digital-identity/static/js/main.33cc11b9.js.map",
+    "787.745a6537.chunk.js.map": "/digital-identity/static/js/787.745a6537.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.da29775e.css",
+    "static/js/main.33cc11b9.js"
+  ]
+}
