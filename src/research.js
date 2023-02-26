@@ -40,7 +40,7 @@ function Research() {
     {
       title: "Partial differential equations in Physics",
       date: "2021",
-      place: "Ecole Normale Supérieure Paris (Ulm) - PSL University",
+      place: "Ecole Normale Supérieure de Paris (Ulm) - PSL University",
       level: "Highscool TalENS programme",
     },
   ];
@@ -147,7 +147,7 @@ function Teaching(props) {
       <div className="research-left-side">
         <div className="research-title">{props.title}</div>
         <div className="research-date">
-          {props.level} ({props.date}), <i>{props.place}</i>
+          <i>{props.level}</i> ({props.date}), {props.place}
         </div>
       </div>
       <div className="research-right-side">

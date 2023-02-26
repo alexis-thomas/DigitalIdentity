@@ -217,6 +217,8 @@ a {
 .research-date {
   color: #a9a9a9;
   padding-top: 0.1em;
+  text-align: justify;
+  text-justify: auto;
 }
 
 .skills {
