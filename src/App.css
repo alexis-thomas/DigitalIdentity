@@ -221,12 +221,24 @@ a {
   text-justify: auto;
 }
 
+.skills-container {
+  width: fit-content;
+  margin: auto;
+  block-size: fit-content;
+  justify-content: center;
+  align-items: center;
+  background-color: #28232d;
+  border-radius: 5%;
+  margin-top: 2em;
+  padding: 1em 2em 2em 2em;
+}
+
 .skills {
   display: grid;
   justify-content: center;
   align-items: center;
   gap: 2em;
-  margin-top: 2em;
+
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(3, auto);
 }
@@ -234,11 +246,13 @@ a {
 .skill {
   position: relative;
   display: flex;
-  height: 4em;
-  width: 4em;
+  height: 5.5em;
+  width: 5.5em;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #1f1a24;
+  border-radius: 20%;
 }
 .skill::before {
   content: "";
@@ -260,4 +274,29 @@ a {
 .bio-paragraph {
   text-align: justify;
   text-justify: auto;
+}
+
+.skill-name {
+  font-size: small;
+}
+
+.skills-title {
+  font-size: x-large;
+  font-weight: bold;
+  padding-bottom: 1em;
+}
+
+.resume-img {
+  object-fit: cover;
+}
+
+.resume-img-container {
+  background-color: white;
+  justify-content: center;
+  border-radius: 10%;
+  align-items: center;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
