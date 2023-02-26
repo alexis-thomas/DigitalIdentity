@@ -25,7 +25,7 @@ function Banner(props) {
   ];
 
   let pages = [
-    { name: "Bio", path: "/" },
+    { name: "Home", path: "/" },
     { name: "Resume", path: "/resume" },
     { name: "Research & teaching", path: "/research" },
     { name: "Articles", path: "/articles" },

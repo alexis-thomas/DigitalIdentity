@@ -56,7 +56,6 @@ function Bio() {
     <div className="bio">
       <img src={Photo} alt="nathou" className="image" />
       <div className="bio__content">
-        <h1 className="bio__title">About Me</h1>
         <div className="app-logos">
           <a
             className="app-logo"
