@@ -16,6 +16,8 @@ import { ReactComponent as Linux } from "./assets/linux.svg";
 import { ReactComponent as SQL } from "./assets/sql.svg";
 import { ReactComponent as TypeScript } from "./assets/typescript.svg";
 import { ReactComponent as Java } from "./assets/java.svg";
+import { Text, Title } from "@mantine/core";
+
 const icons = [Python, React, AWS, Docker, Git, Linux, SQL, TypeScript, Java];
 
 let skills = [
@@ -106,15 +108,18 @@ function Bio() {
           solutions.
         </div>
       </div>
+      <div className="skills-container">
+        <div className="skills-title">Skills</div>
 
-      <div class="skills">
-        {skills.map((skill) => (
-          <Skill
-            name={skills.name}
-            logo={skills.logo}
-            id={skills.indexOf(skill)}
-          />
-        ))}
+        <div class="skills">
+          {skills.map((skill) => (
+            <Skill
+              name={skill.name}
+              logo={skill.logo}
+              id={skills.indexOf(skill)}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -125,7 +130,15 @@ function Skill(props) {
   return (
     <div className="skill">
       <Icon height={40} width={40} />
-      <div className="skil-name">{props.name}</div>
+      {/* <div className="skill-name">{props.name}</div> */}
+      <Text
+        fz="sm"
+        c="dimmed"
+        variant="gradient"
+        gradient={{ from: "indigo.9", to: "cyan.2", deg: 45 }}
+      >
+        {props.name}
+      </Text>
     </div>
   );
 }
