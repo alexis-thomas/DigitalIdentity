@@ -1,7 +1,8 @@
 import { Timeline, Text, Title, Avatar, List, Spoiler } from "@mantine/core";
 
+var w = document.documentElement.clientWidth || window.innerWidth;
+
 function Resume() {
-  var w = document.documentElement.clientWidth || window.innerWidth;
   let experiences = [
     {
       name: "Amazon",
@@ -17,7 +18,7 @@ function Resume() {
       steps: [
         {
           date: "march. 2022 - june. 2022",
-          job: "Software Development Engineer",
+          job: "Software Development Engineer Intern",
           description: [
             "Responsible for all the technical aspects of the team.",
             "I design, implement and maintain software and the AWS infrastructure in order to provide technologies to accelerate and simplify how the team and its stakeholders can understand the European delivery speed.",
@@ -95,7 +96,7 @@ function Resume() {
       date: "feb. 2023",
       description:
         "Certifies the ability to strategically design well-architected distributed systems that are scalable, resilient, efficient, and fault-tolerant.",
-      logo: "./assets/aws_certificate.png",
+      logo: "aws_certificate.png",
     },
   ];
 
@@ -108,50 +109,22 @@ function Resume() {
           bullet={<Logo src={experience.logo} />}
           title={<CustomTitle text={experience.name} />}
         >
-          <div
-            style={{
-              paddingLeft: "2em",
-              paddingBottom: "1em",
-              boxSizing: "border-box",
-            }}
-          >
-            <Title order={5}>{experience.job}</Title>
-            <Text color="dimmed" size="sm">
-              {experience.date}
-            </Text>
-            <Spoiler maxHeight={0} showLabel="Show more" hideLabel="Hide">
-              {Array.isArray(experience.description) ? (
-                <div className="descriptions">
-                  {experience.description.map((item) => (
-                    <div>{item}</div>
-                  ))}
-                </div>
-              ) : (
-                <Text>{experience.description}</Text>
-              )}
-            </Spoiler>
-          </div>
+          <ItemText
+            title={experience.job}
+            date={experience.date}
+            description={experience.description}
+            spoiler={true}
+          />
         </Timeline.Item>,
 
         experience.steps.map((step) => (
           <Timeline.Item lineVariant="dotted" bulletSize={25}>
-            <div style={{ paddingLeft: "2em", paddingBottom: "1em" }}>
-              <Title order={5}>{experience.job}</Title>
-              <Text color="dimmed" size="sm">
-                {step.date}
-              </Text>
-              <Spoiler maxHeight={0} showLabel="Show more" hideLabel="Hide">
-                {Array.isArray(step.description) ? (
-                  <div className="descriptions">
-                    {step.description.map((item) => (
-                      <div>{item}</div>
-                    ))}
-                  </div>
-                ) : (
-                  <Text>{step.description}</Text>
-                )}
-              </Spoiler>
-            </div>
+            <ItemText
+              title={step.job}
+              date={step.date}
+              description={step.description}
+              spoiler={true}
+            />
           </Timeline.Item>
         )),
       ]
@@ -162,21 +135,12 @@ function Resume() {
         bullet={<Logo src={experience.logo} />}
         title={<CustomTitle text={experience.name} />}
       >
-        <div style={{ paddingLeft: "2em", paddingBottom: "1em" }}>
-          <Title order={5}>{experience.job}</Title>
-          <Text color="dimmed" size="sm">
-            {experience.date}
-          </Text>
-          {Array.isArray(experience.description) ? (
-            <List listStyleType="disc">
-              {experience.description.map((item) => (
-                <List.Item>{item}</List.Item>
-              ))}
-            </List>
-          ) : (
-            <Text>{experience.description}</Text>
-          )}
-        </div>
+        <ItemText
+          title={experience.job}
+          date={experience.date}
+          description={experience.description}
+          spoiler={true}
+        />
       </Timeline.Item>
     )
   );
@@ -184,35 +148,28 @@ function Resume() {
   let formation_timelines = formations.map((formation) => (
     <Timeline.Item
       bullet={<Logo src={formation.logo} />}
+      bulletSize={w > 480 ? 70 : 60}
       title={<CustomTitle text={formation.name} />}
     >
-      <div style={{ paddingLeft: "2em", paddingBottom: "1em" }}>
-        <Text color="dimmed" size="sm">
-          {formation.date}
-        </Text>
-        <Text>{formation.description}</Text>
-      </div>
+      <ItemText
+        title={formation.job}
+        date={formation.date}
+        description={formation.description}
+      />
     </Timeline.Item>
   ));
 
   let certificates_timelines = certificates.map((certificate) => (
     <Timeline.Item
-      bullet={
-        <Avatar
-          radius={w > 480 ? 70 : 60}
-          size={w > 480 ? 70 : 60}
-          src={require(`${certificate.logo}`)}
-          variant="filled"
-        />
-      }
+      bullet={<Logo src={certificate.logo} />}
+      bulletSize={w > 480 ? 70 : 60}
       title={<CustomTitle text={certificate.name} />}
     >
-      <div style={{ paddingLeft: "2em", paddingBottom: "1em" }}>
-        <Text color="dimmed" size="sm">
-          {certificate.date}
-        </Text>
-        <Text>{certificate.description}</Text>
-      </div>
+      <ItemText
+        title={certificate.job}
+        date={certificate.date}
+        description={certificate.description}
+      />
     </Timeline.Item>
   ));
 
@@ -251,7 +208,12 @@ function Resume() {
           Education
         </Text>
       </div>
-      <Timeline active={4} lineWidth={2} bulletSize={w > 480 ? 70 : 60}>
+      <Timeline
+        color="gray"
+        active={4}
+        lineWidth={4}
+        bulletSize={w > 480 ? 70 : 60}
+      >
         {formation_timelines}
       </Timeline>
       <div style={{ paddingBottom: "1.5em", paddingTop: "1.5em" }}>
@@ -259,9 +221,46 @@ function Resume() {
           Certificates
         </Text>
       </div>
-      <Timeline active={4} lineWidth={2} bulletSize={w > 480 ? 70 : 60}>
+      <Timeline
+        color="gray"
+        active={4}
+        lineWidth={4}
+        bulletSize={w > 480 ? 70 : 60}
+      >
         {certificates_timelines}
       </Timeline>
+    </div>
+  );
+}
+
+function ItemText(props) {
+  return (
+    <div
+      style={{
+        paddingLeft: "2em",
+        paddingBottom: "1em",
+        boxSizing: "border-box",
+      }}
+    >
+      <Title order={5}>{props.title}</Title>
+      <Text color="dimmed" size="sm">
+        {props.date}
+      </Text>
+      <Spoiler
+        maxHeight={props.spoiler && w < 480 ? 0 : 150}
+        showLabel="Show more"
+        hideLabel="Hide"
+      >
+        {Array.isArray(props.description) ? (
+          <div className="descriptions">
+            {props.description.map((item) => (
+              <div>{item}</div>
+            ))}
+          </div>
+        ) : (
+          <Text>{props.description}</Text>
+        )}
+      </Spoiler>
     </div>
   );
 }

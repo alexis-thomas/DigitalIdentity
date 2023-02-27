@@ -239,17 +239,26 @@ a {
   background-color: #28232d;
   border-radius: 5%;
   margin-top: 2em;
-  padding: 1em 2em 2em 2em;
+  padding: 1em 1em 1em 1em;
 }
 
 .skills {
   display: grid;
   justify-content: center;
   align-items: center;
-  gap: 2em;
-
+  gap: 1em;
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(3, auto);
+}
+
+@media only screen and (min-width: 768px) {
+  .skills-container {
+    padding: 1em 2em 2em 2em;
+  }
+
+  .skills {
+    gap: 2em;
+  }
 }
 
 .skill {

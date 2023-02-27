@@ -46,7 +46,7 @@ function Articles() {
   ];
   return (
     <div className="research">
-      <Title style={{ paddingBottom: "1em" }} order={2}>
+      <Title style={{ paddingBottom: "1em" }} order={1}>
         My articles
       </Title>
       {articles.map((article) => (

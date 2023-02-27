@@ -134,7 +134,7 @@ function Skill(props) {
         fz="sm"
         c="dimmed"
         variant="gradient"
-        gradient={{ from: "indigo.9", to: "cyan.2", deg: 45 }}
+        gradient={{ from: "indigo.4", to: "cyan.2", deg: 45 }}
       >
         {props.name}
       </Text>
