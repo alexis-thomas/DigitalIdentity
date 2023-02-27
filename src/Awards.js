@@ -2,6 +2,8 @@ import { Title } from "@mantine/core";
 import { IconLink } from "@tabler/icons-react";
 import { SiGithub } from "react-icons/si";
 
+var w = document.documentElement.clientWidth || window.innerWidth;
+
 function Awards() {
   let awards = [
     {
@@ -64,6 +66,7 @@ function Awards() {
 function Article(props) {
   return (
     <div className="research-container">
+      {console.log(w)}
       <div className="research-left-side">
         <div className="research-title">{props.name}</div>
         <div className="research-date">
@@ -71,7 +74,12 @@ function Article(props) {
           <i>{props.description}</i>
         </div>
       </div>
-      <div className="research-right-side">
+      <div
+        className="research-right-side"
+        style={{
+          flexDirection: `${w > 480 ? "row" : "column"}`,
+        }}
+      >
         {props.lienGithub ? (
           <a target="_blank" href={props.lienGithub}>
             <SiGithub size={30} />

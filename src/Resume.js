@@ -247,7 +247,7 @@ function ItemText(props) {
         {props.date}
       </Text>
       <Spoiler
-        maxHeight={props.spoiler && w < 480 ? 0 : 150}
+        maxHeight={props.spoiler && w < 480 ? 0 : 120}
         showLabel="Show more"
         hideLabel="Hide"
       >

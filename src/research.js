@@ -2,6 +2,8 @@ import { ActionIcon, Title } from "@mantine/core";
 import { IconDownload, IconLink } from "@tabler/icons-react";
 import { SiGithub } from "react-icons/si";
 
+var w = document.documentElement.clientWidth || window.innerWidth;
+
 function Research() {
   let articles = [
     {
@@ -46,7 +48,7 @@ function Research() {
   ];
   return (
     <div className="research">
-      <Title style={{ paddingBottom: "1em" }} order={1}>
+      {/*<Title style={{ paddingBottom: "1em" }} order={1}>
         Peer-reviewed articles
       </Title>
       {articles.map((article) => (
@@ -58,7 +60,7 @@ function Research() {
           lienPdf={article.pdf}
           lienGithub={article.github}
         />
-      ))}
+      ))}*/}
 
       <Title style={{ paddingTop: "1em", paddingBottom: "1em" }} order={1}>
         Talks
@@ -99,7 +101,12 @@ function Article(props) {
           {props.authors.join(", ")} ({props.date}) in <i>{props.journal}</i>
         </div>
       </div>
-      <div className="research-right-side">
+      <div
+        className="research-right-side"
+        style={{
+          flexDirection: `${w > 480 ? "row" : "column"}`,
+        }}
+      >
         {props.lienGithub ? (
           <a target="_blank" href={props.lienGithub}>
             <SiGithub size={30} />
@@ -119,13 +126,18 @@ function Talk(props) {
   return (
     <div className="research-container">
       <div className="research-left-side">
-        <div className="research-title">{props.title}</div>
+        <div className="research-title">{props.conf}</div>
         <div className="research-date">
           {"  "}
-          <i>{props.conf}</i> ({props.date}), {props.place}
+          <i>{props.title}</i> ({props.date}), {props.place}
         </div>
       </div>
-      <div className="research-right-side">
+      <div
+        className="research-right-side"
+        style={{
+          flexDirection: `${w > 480 ? "row" : "column"}`,
+        }}
+      >
         {props.lienConf ? (
           <a target="_blank" href={props.lienConf}>
             <IconLink size={30} />
@@ -150,7 +162,12 @@ function Teaching(props) {
           <i>{props.level}</i> ({props.date}), {props.place}
         </div>
       </div>
-      <div className="research-right-side">
+      <div
+        className="research-right-side"
+        style={{
+          flexDirection: `${w > 480 ? "row" : "column"}`,
+        }}
+      >
         {props.lienConf ? (
           <a target="_blank" href={props.lienConf}>
             <IconLink size={30} />

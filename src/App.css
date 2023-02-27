@@ -20,7 +20,7 @@ a {
 
 .main-view {
   margin: 2% 0;
-  width: 90%; /* fallback for small screens */
+  width: 100%; /* fallback for small screens */
   align-self: center;
   flex: 1;
 }
@@ -118,6 +118,8 @@ a {
   align-items: baseline;
   display: inline-block;
   text-align: left;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .title-container {
@@ -188,7 +190,6 @@ a {
 
 .research-right-side {
   margin-left: 1em;
-  padding-right: 1em;
   display: flex;
   gap: 1em;
 }
@@ -292,6 +293,8 @@ a {
 .bio-paragraph {
   text-align: justify;
   text-justify: auto;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .skill-name {
