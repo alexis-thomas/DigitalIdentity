@@ -6,7 +6,7 @@ import {
   SiResearchgate,
 } from "react-icons/si";
 import { IconContext } from "react-icons";
-import Photo from "./assets/alexis.jpeg";
+import Photo from "./assets/alexis.jpg";
 import { ReactComponent as Python } from "./assets/python.svg";
 import { ReactComponent as React } from "./assets/react.svg";
 import { ReactComponent as AWS } from "./assets/aws.svg";
@@ -58,6 +58,7 @@ function Bio() {
       <div className="bio__content">
         <div className="app-logos">
           <a
+            aria-label="LinkedIn"
             className="app-logo"
             target="_blank"
             rel="noopener noreferrer"
@@ -82,6 +83,7 @@ function Bio() {
             <SiResearchgate size={30} />
           </a> */}
           <a
+            aria-label="Github"
             className="app-logo"
             target="_blank"
             rel="noopener noreferrer"

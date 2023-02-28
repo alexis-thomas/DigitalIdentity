@@ -4,7 +4,7 @@ import { MantineProvider, useMantineTheme } from "@mantine/core";
 import { useState } from "react";
 import { Drawer, Button, Group, Burger, NavLink } from "@mantine/core";
 import ReactDOM from "react-dom/client";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Awards from "./Awards.js";
 import Banner from "./Banner";
 import Bio from "./Bio";
@@ -42,13 +42,14 @@ function App() {
     >
       <div className="App">
         <header className="App-header">
-          <HashRouter>
+          <BrowserRouter>
             <div className="burger-container">
               <Burger
                 color="white"
                 opened={opened}
                 onClick={() => setOpened((o) => !o)}
-              />
+                aria-label="Open navigation"
+              ></Burger>
             </div>
             {/* <Banner /> */}
             <Drawer
@@ -61,6 +62,7 @@ function App() {
               trapFocus={false}
               closeOnEscape={false}
               lockScroll={false}
+              closeButtonLabel="Close"
             >
               <Banner close={() => setOpened(false)} />
             </Drawer>
@@ -74,7 +76,7 @@ function App() {
                 <Route path="/resume" element={<Resume />} />
               </Routes>
             </div>
-          </HashRouter>
+          </BrowserRouter>
           <Footer></Footer>
         </header>
       </div>
