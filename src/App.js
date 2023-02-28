@@ -55,7 +55,7 @@ function App() {
               opened={opened}
               onClose={() => setOpened(false)}
               padding="xl"
-              size="md"
+              size="sm"
               color="#28232d"
               withOverlay={false}
               trapFocus={false}

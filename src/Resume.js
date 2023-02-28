@@ -37,14 +37,14 @@ function Resume() {
       ],
       logo: "bmw.png",
     },
-    {
-      name: "EDF R&D",
-      job: "Research Scientist",
-      date: "sept. 2022 - dec. 2025",
-      description:
-        "Research scientist in Machine Learning applied to forecasting the French electricity load",
-      logo: "edf.png",
-    },
+    // {
+    //   name: "EDF R&D",
+    //   job: "Research Scientist",
+    //   date: "sept. 2022 - dec. 2025",
+    //   description:
+    //     "Research scientist in Machine Learning applied to forecasting the French electricity load",
+    //   logo: "edf.png",
+    // },
     {
       name: "Amazon Web Services",
       job: "Software Development Engineer Intern",
@@ -62,30 +62,30 @@ function Resume() {
   let formations = [
     {
       name: "Mines Paris",
-      date: "janv. 2018 - sept. 2022",
+      date: "2018 - 2022",
       description:
-        "Master's Degree in Science and Executive Engineering, Computer Science",
+        "One of the top three French engineering schools. Advanced courses in Mathematics, algorithms and machine learning. Major in computer science.",
       logo: "mines.png",
     },
+    // {
+    //   name: "ULM",
+    //   date: "janv. 2018 - sept. 2022",
+    //   description:
+    //     "Master's Degree in Science and Executive Engineering, Computer Science",
+    //   logo: "ulm.jpg",
+    // },
+    // {
+    //   name: "LLG",
+    //   date: "janv. 2018 - sept. 2022",
+    //   description:
+    //     "Master's Degree in Science and Executive Engineering, Computer Science",
+    //   logo: "llg.jpg",
+    // },
     {
-      name: "ULM",
-      date: "janv. 2018 - sept. 2022",
+      name: "Saint-Louis",
+      date: "2016 - 2018",
       description:
-        "Master's Degree in Science and Executive Engineering, Computer Science",
-      logo: "ulm.jpg",
-    },
-    {
-      name: "LLG",
-      date: "janv. 2018 - sept. 2022",
-      description:
-        "Master's Degree in Science and Executive Engineering, Computer Science",
-      logo: "llg.jpg",
-    },
-    {
-      name: "SL",
-      date: "janv. 2018 - sept. 2022",
-      description:
-        "Master's Degree in Science and Executive Engineering, Computer Science",
+        "Two-year undergraduate courses for entrance exams to the top French engineering schools.",
       logo: "saint_louis.webp",
     },
   ];
@@ -247,7 +247,7 @@ function ItemText(props) {
         {props.date}
       </Text>
       <Spoiler
-        maxHeight={props.spoiler && w < 480 ? 0 : 120}
+        maxHeight={props.spoiler && w < 480 ? 0 : 90}
         showLabel="Show more"
         hideLabel="Hide"
       >

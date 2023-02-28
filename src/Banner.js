@@ -18,8 +18,8 @@ function Banner(props) {
   const icons = [
     IconHome,
     IconSchool,
-    IconNews,
-    IconArticle,
+    // IconNews,
+    // IconArticle,
     IconAward,
     IconAddressBook,
   ];
@@ -27,8 +27,8 @@ function Banner(props) {
   let pages = [
     { name: "Home", path: "/" },
     { name: "Resume", path: "/resume" },
-    { name: "Research & teaching", path: "/research" },
-    { name: "Articles", path: "/articles" },
+    // { name: "Research & teaching", path: "/research" },
+    // { name: "Articles", path: "/articles" },
     { name: "Awards", path: "/awards" },
     { name: "Contact", path: "/contact" },
   ];
@@ -57,8 +57,12 @@ function Banner(props) {
             style={{ textDecoration: "none" }}
           >
             <NavLink
-              label={<Text size={"lg"}>{page.name}</Text>}
-              icon={<Icon size={25} />}
+              label={
+                <Text size={"lg"} style={{ paddingRight: "1em" }}>
+                  {page.name}
+                </Text>
+              }
+              icon={<Icon size={25} style={{ paddingLeft: "1em" }} />}
               active={
                 location.pathname.slice(location.pathname.lastIndexOf("/")) ===
                 page.path

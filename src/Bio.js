@@ -6,7 +6,7 @@ import {
   SiResearchgate,
 } from "react-icons/si";
 import { IconContext } from "react-icons";
-import Photo from "./assets/nathou.jpeg";
+import Photo from "./assets/alexis.jpeg";
 import { ReactComponent as Python } from "./assets/python.svg";
 import { ReactComponent as React } from "./assets/react.svg";
 import { ReactComponent as AWS } from "./assets/aws.svg";
@@ -65,46 +65,46 @@ function Bio() {
           >
             <SiLinkedin size={30} />
           </a>
-          <a
+          {/* <a
             className="app-logo"
             target="_blank"
             rel="noopener noreferrer"
             href=""
           >
             <SiGooglescholar size={30} />
-          </a>
-          <a
+          </a> */}
+          {/* <a
             className="app-logo"
             target="_blank"
             rel="noopener noreferrer"
             href="https://www.researchgate.net/profile/Nathan-Doumeche"
           >
             <SiResearchgate size={30} />
-          </a>
+          </a> */}
           <a
             className="app-logo"
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/Elial111"
+            href="https://github.com/alexis-thomas"
           >
             <SiGithub size={30} />
           </a>
 
-          <a
+          {/* <a
             className="app-logo"
             target="_blank"
             rel="noopener noreferrer"
             href=""
           >
             <SiGitlab size={30} />
-          </a>
+          </a> */}
         </div>
         <div className="bio-paragraph">
-          I am a software engineer who is passionate about building software
-          that improves the lives of others. I have experience in web
-          development, mobile development, and machine learning. I enjoy
-          learning new technologies and applying them to create innovative
-          solutions.
+          Graduate at Mines Paris & software development engineer at Amazon I
+          have a keen interest in mathematics, computer science and software
+          development. I have both full stack development skills in Python, Java
+          or JavaScript and experience in project management in large companies.
+          I am fascinated by cloud technologies such as AWS.
         </div>
       </div>
       <div className="skills-container">

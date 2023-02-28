@@ -10,8 +10,11 @@ function Contact() {
 
       <div class="details">
         Please contact me at{" "}
-        <a href="mailto: nathan.doumeche@gmail.com" className="details-value">
-          nathan.doumeche@gmail.com
+        <a
+          href="mailto: alexis.thomasjutisz@gmail.com"
+          className="details-value"
+        >
+          alexis.thomasjutisz@gmail.com
         </a>
         .
       </div>
