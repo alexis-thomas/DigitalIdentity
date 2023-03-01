@@ -29,7 +29,7 @@ function Banner(props) {
     { name: "Resume", path: "/resume" },
     // { name: "Research & teaching", path: "/research" },
     // { name: "Articles", path: "/articles" },
-    { name: "Awards", path: "/awards" },
+    { name: "Achievements", path: "/achievements" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -56,18 +56,21 @@ function Banner(props) {
             to={page.path}
             style={{ textDecoration: "none" }}
           >
-            <NavLink
-              label={
-                <Text size={"lg"} style={{ paddingRight: "1em" }}>
-                  {page.name}
-                </Text>
-              }
-              icon={<Icon size={25} style={{ paddingLeft: "1em" }} />}
-              active={
-                location.pathname.slice(location.pathname.lastIndexOf("/")) ===
-                page.path
-              }
-            />
+            <div class="navlink-container">
+              <NavLink
+                label={
+                  <Text size={"lg"} style={{}}>
+                    {page.name}
+                  </Text>
+                }
+                icon={<Icon size={25} style={{}} />}
+                active={
+                  location.pathname.slice(
+                    location.pathname.lastIndexOf("/")
+                  ) === page.path
+                }
+              />
+            </div>
           </Link>
         );
       })}

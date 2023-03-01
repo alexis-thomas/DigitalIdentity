@@ -54,7 +54,8 @@ let skills = [
 function Bio() {
   return (
     <div className="bio">
-      <img src={Photo} alt="nathou" className="image" />
+      <img src={Photo} alt="alexis" className="image" />
+      <Title>Alexis Thomas</Title>
       <div className="bio__content">
         <div className="app-logos">
           <a
@@ -102,11 +103,38 @@ function Bio() {
           </a> */}
         </div>
         <div className="bio-paragraph">
-          Graduate at Mines Paris & software development engineer at Amazon I
-          have a keen interest in mathematics, computer science and software
-          development. I have both full stack development skills in Python, Java
-          or JavaScript and experience in project management in large companies.
-          I am fascinated by cloud technologies such as AWS.
+          <div>Welcome to my website!</div>
+          <div>
+            I am a Mines Paris graduate and a Software Development Engineer at
+            Amazon, where I have the opportunity to work on a wide range of
+            challenging projects.
+          </div>
+          <div>
+            My passion for mathematics, computer science, and software
+            development started during my studies at Mines Paris, where I had
+            the chance to take advanced courses in these fields. Since then, I
+            have developed full-stack development skills in Python, Java, and
+            TypeScript, and gained project management experience in large
+            companies.
+          </div>
+          <div>
+            {" "}
+            What fascinates me most these days is cloud technologies and
+            especially AWS. I enjoy working on complex cloud architectures and
+            leveraging cloud services to build innovative solutions that solve
+            real-world problems.
+          </div>
+          <div>
+            In my free time, I enjoy learning about emerging technologies and
+            exploring new ideas. I'm always looking for ways to improve my
+            skills and stay up-to-date with the latest trends in software
+            development. Among my tech projects, I recently built prototypes for
+            a social network website and a clothes delivery mobile app.
+          </div>
+          <div>
+            Thank you for visiting my website, looking forward to connecting
+            with you soon!
+          </div>
         </div>
       </div>
       <div className="skills-container">

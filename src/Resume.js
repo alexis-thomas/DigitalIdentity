@@ -10,19 +10,19 @@ function Resume() {
       date: "since march. 2022",
       logo: "amazon.png",
       description: [
-        "As the only Software Development Engineer of a research team I own the subjects related to architecture, development and engineering.",
-        "I develop various tools related to input processing, data pipelines & automated deployments.",
-        "I am building CI/CD workflows to deploy operational research models on scalable architectures using serverless cloud technologies & containerization.",
-        "Stack: ...",
+        "Owning all aspects of software development for a research team, including architecture, development, and engineering.",
+        "Developing a scalable and highly customizable solution to run a cascade of services in Docker container with parallelization and feedback loops.",
+        "Working on multiple tools for input processing, data pipelines, and automated deployments.",
+        "Built CI/CD workflows to deploy operational research models on scalable architectures using serverless cloud technologies and containerization.",
+        "Technologies used: Python, Java, Postgres, AWS computing (EC2, Lambda, ECS, Fargate), and data storage/processing (Glue, S3, RDS, Redshift, DynamoDB, Glue).",
       ],
       steps: [
         {
           date: "march. 2022 - june. 2022",
           job: "Software Development Engineer Intern",
           description: [
-            "Responsible for all the technical aspects of the team.",
-            "I design, implement and maintain software and the AWS infrastructure in order to provide technologies to accelerate and simplify how the team and its stakeholders can understand the European delivery speed.",
-            "One of our main products is a Data visualization platform with hundreds of internal users which includes operational research models, automated reporting, Data pipelines and Big Data processing.",
+            "Responsible for all technical aspects of the team, including designing, implementing, and maintaining software and AWS infrastructure to support European delivery speed.",
+            "Contributed to the development a data visualization platform used by hundreds of internal users, featuring operational research models, automated reporting, data pipelines, and big data processing.",
           ],
         },
       ],
@@ -32,8 +32,8 @@ function Resume() {
       job: "Finance Project Manager",
       date: "feb. 2022 - july. 2021",
       description: [
-        "Framing of projects with the project managers and monitoring of their progress until their completion.",
-        "Financial and human resources estimates as well as risks and opportunities for the entire BMW France project portfolio.",
+        "Collaborated with project managers to frame projects and monitored their progress to completion.",
+        "Provided financial and human resources estimates, identified risks and opportunities, and managed the entire BMW France project portfolio.",
       ],
       logo: "bmw.png",
     },
@@ -50,12 +50,12 @@ function Resume() {
       job: "Software Development Engineer Intern",
       date: "june. 2020 - dec. 2020",
       description: [
-        "Creation of a new service allowing our customers to change configuration of other internal tools at runtime.",
-        "Responsible for the full project: scope, design, implementation and testing.",
-        "Development of a Java backend and a React frontend.",
+        "Created a new service that enabled customers to change the configuration of internal tools at runtime.",
+        "Responsible for the full project life cycle, including scoping, design, implementation, and testing.",
+        "Developed a Java backend and a React frontend.",
       ],
 
-      logo: "aws.jpeg",
+      logo: "aws.png",
     },
   ];
 
@@ -64,7 +64,7 @@ function Resume() {
       name: "Mines Paris",
       date: "2018 - 2022",
       description:
-        "One of the top three French engineering schools. Advanced courses in Mathematics, algorithms and machine learning. Major in computer science.",
+        "Top three French engineering schools. Advanced courses in Mathematics, algorithms and machine learning. Major in computer science.",
       logo: "mines.png",
     },
     // {
@@ -86,19 +86,11 @@ function Resume() {
       date: "2016 - 2018",
       description:
         "Two-year undergraduate courses for entrance exams to the top French engineering schools.",
-      logo: "saint_louis.webp",
+      logo: "saint_louis.png",
     },
   ];
 
-  let certificates = [
-    {
-      name: "AWS Certified Solutions Architect - Associate",
-      date: "feb. 2023",
-      description:
-        "Certifies the ability to strategically design well-architected distributed systems that are scalable, resilient, efficient, and fault-tolerant.",
-      logo: "aws_certificate.png",
-    },
-  ];
+  let certificates = [];
 
   let experiences_timelines = experiences.map((experience) =>
     experience.steps ? (
@@ -106,7 +98,7 @@ function Resume() {
         <Timeline.Item
           bulletSize={w > 480 ? 70 : 60}
           radius="md"
-          bullet={<Logo src={experience.logo} />}
+          bullet={<Logo src={experience.logo} background={true} />}
           title={<CustomTitle text={experience.name} />}
         >
           <ItemText
@@ -132,7 +124,7 @@ function Resume() {
       <Timeline.Item
         lineVariant="dotted"
         bulletSize={w > 480 ? 70 : 60}
-        bullet={<Logo src={experience.logo} />}
+        bullet={<Logo src={experience.logo} background={true} />}
         title={<CustomTitle text={experience.name} />}
       >
         <ItemText
@@ -147,7 +139,7 @@ function Resume() {
 
   let formation_timelines = formations.map((formation) => (
     <Timeline.Item
-      bullet={<Logo src={formation.logo} />}
+      bullet={<Logo src={formation.logo} background={true} />}
       bulletSize={w > 480 ? 70 : 60}
       title={<CustomTitle text={formation.name} />}
     >
@@ -159,41 +151,12 @@ function Resume() {
     </Timeline.Item>
   ));
 
-  let certificates_timelines = certificates.map((certificate) => (
-    <Timeline.Item
-      bullet={<Logo src={certificate.logo} />}
-      bulletSize={w > 480 ? 70 : 60}
-      title={<CustomTitle text={certificate.name} />}
-    >
-      <ItemText
-        title={certificate.job}
-        date={certificate.date}
-        description={certificate.description}
-      />
-    </Timeline.Item>
-  ));
-
-  function Logo(props) {
-    return (
-      <div className="resume-img-container" style={{}}>
-        <img
-          src={props.src}
-          style={{
-            width: `${w > 480 ? "4em" : "3.5em"}`,
-            height: `${w > 480 ? "4em" : "3.5em"}`,
-          }}
-          className="resume-img"
-        />
-      </div>
-    );
-  }
-
   return (
     <div className="resume">
       <div style={{ paddingBottom: "1.5em" }}>
-        <Text size={30} weight={700} color="" className="section-container">
+        <Title order={1} color="" className="section-container">
           Work experience
-        </Text>
+        </Title>
       </div>
       <Timeline
         color="gray"
@@ -204,9 +167,9 @@ function Resume() {
         {experiences_timelines}
       </Timeline>
       <div style={{ paddingBottom: "1.5em", paddingTop: "1.5em" }}>
-        <Text size={30} weight={700} color="" className="section-container">
+        <Title order={1} color="" className="section-container">
           Education
-        </Text>
+        </Title>
       </div>
       <Timeline
         color="gray"
@@ -215,19 +178,6 @@ function Resume() {
         bulletSize={w > 480 ? 70 : 60}
       >
         {formation_timelines}
-      </Timeline>
-      <div style={{ paddingBottom: "1.5em", paddingTop: "1.5em" }}>
-        <Text size={30} weight={700} color="" className="section-container">
-          Certificates
-        </Text>
-      </div>
-      <Timeline
-        color="gray"
-        active={4}
-        lineWidth={4}
-        bulletSize={w > 480 ? 70 : 60}
-      >
-        {certificates_timelines}
       </Timeline>
     </div>
   );
@@ -261,6 +211,24 @@ function ItemText(props) {
           <Text>{props.description}</Text>
         )}
       </Spoiler>
+    </div>
+  );
+}
+
+export function Logo(props) {
+  return (
+    <div
+      className="resume-img-container"
+      style={{ backgroundColor: `${props.background && "white"}` }}
+    >
+      <img
+        src={props.src}
+        style={{
+          width: `${w > 480 ? "4em" : "3.5em"}`,
+          height: `${w > 480 ? "4em" : "3.5em"}`,
+        }}
+        className="resume-img"
+      />
     </div>
   );
 }

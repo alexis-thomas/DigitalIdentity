@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Drawer, Button, Group, Burger, NavLink } from "@mantine/core";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Awards from "./Awards.js";
+import Achievements from "./Achievements.js";
 import Banner from "./Banner";
 import Bio from "./Bio";
 import Contact from "./Contact.js";
@@ -33,7 +33,7 @@ function App() {
             "#4d4f66",
             "#34354a",
             "#2b2c3d",
-            "#28232d",
+            "#26212b",
             "#0c0d21",
             "#01010a",
           ],
@@ -71,7 +71,7 @@ function App() {
                 <Route exact path="/" element={<Bio />} />
                 <Route path="/research" element={<Research />} />
                 <Route path="/articles" element={<Articles />} />
-                <Route path="/awards" element={<Awards />} />
+                <Route path="/achievements" element={<Achievements />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/resume" element={<Resume />} />
               </Routes>
