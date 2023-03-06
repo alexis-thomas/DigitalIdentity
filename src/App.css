@@ -35,7 +35,6 @@ a {
 
 .Banner {
   /* background-color: rgba(255, 255, 255, 0.04); */
-  position: absolute;
   font-size: x-large;
   font-weight: bold;
   /* top: 0px;
@@ -75,7 +74,7 @@ a {
   vertical-align: middle;
   display: block;
   position: relative;
-  padding: 0.7rem 3rem;
+  padding: 0.7em 3em;
 }
 
 .app-logos {
@@ -161,9 +160,9 @@ a {
   justify-content: space-between;
 }
 
-.research-container:hover {
+/* .research-container:hover {
   background-color: #393241;
-}
+} */
 
 .research {
   display: flex;
