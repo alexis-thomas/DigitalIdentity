@@ -13,6 +13,7 @@ import Footer from "./Footer.js";
 import Research from "./research";
 import Resume from "./Resume";
 import Articles from "./Articles";
+import { Notifications } from "@mantine/notifications";
 
 function App() {
   var w = document.documentElement.clientWidth || window.innerWidth;
@@ -40,6 +41,7 @@ function App() {
         },
       }}
     >
+      <Notifications />
       <div className="App">
         <header className="App-header">
           <BrowserRouter>
@@ -56,13 +58,12 @@ function App() {
               opened={opened}
               onClose={() => setOpened(false)}
               padding="xl"
-              size="sm"
+              size="xs"
               color="#28232d"
               withOverlay={false}
               trapFocus={false}
               closeOnEscape={false}
               lockScroll={false}
-              closeButtonLabel="Close"
             >
               <Banner close={() => setOpened(false)} />
             </Drawer>

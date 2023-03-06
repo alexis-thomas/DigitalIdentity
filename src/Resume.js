@@ -11,7 +11,7 @@ function Resume() {
       logo: "amazon.png",
       description: [
         "Owning all aspects of software development for a research team, including architecture, development, and engineering.",
-        "Developing a scalable and highly customizable solution to run a cascade of services in Docker container with parallelization and feedback loops.",
+        "Developing a scalable and highly customizable solution to run a cascade of services in Docker containers with parallelization and feedback loops.",
         "Working on multiple tools for input processing, data pipelines, and automated deployments.",
         "Built CI/CD workflows to deploy operational research models on scalable architectures using serverless cloud technologies and containerization.",
         "Technologies used: Python, Java, Postgres, AWS computing (EC2, Lambda, ECS, Fargate), and data storage/processing (Glue, S3, RDS, Redshift, DynamoDB, Glue).",
@@ -22,7 +22,7 @@ function Resume() {
           job: "Software Development Engineer Intern",
           description: [
             "Responsible for all technical aspects of the team, including designing, implementing, and maintaining software and AWS infrastructure to support European delivery speed.",
-            "Contributed to the development a data visualization platform used by hundreds of internal users, featuring operational research models, automated reporting, data pipelines, and big data processing.",
+            "Contributed to the development of a data visualization platform used by hundreds of internal users, featuring operational research models, automated reporting, data pipelines, and big data processing.",
           ],
         },
       ],
@@ -33,7 +33,7 @@ function Resume() {
       date: "feb. 2022 - july. 2021",
       description: [
         "Collaborated with project managers to frame projects and monitored their progress to completion.",
-        "Provided financial and human resources estimates, identified risks and opportunities, and managed the entire BMW France project portfolio.",
+        "Provided financial and human resource estimates, identified risks and opportunities, and managed the entire BMW France project portfolio.",
       ],
       logo: "bmw.png",
     },
@@ -51,7 +51,7 @@ function Resume() {
       date: "june. 2020 - dec. 2020",
       description: [
         "Created a new service that enabled customers to change the configuration of internal tools at runtime.",
-        "Responsible for the full project life cycle, including scoping, design, implementation, and testing.",
+        "Responsible for the entire project lifecycle, including scoping, design, implementation, and testing.",
         "Developed a Java backend and a React frontend.",
       ],
 
@@ -64,7 +64,7 @@ function Resume() {
       name: "Mines Paris",
       date: "2018 - 2022",
       description:
-        "Top three French engineering schools. Advanced courses in Mathematics, algorithms and machine learning. Major in computer science.",
+        "Top three French engineering schools. Advanced courses in mathematics and algorithms. Major in computer science.",
       logo: "mines.png",
     },
     // {
@@ -100,6 +100,7 @@ function Resume() {
           radius="md"
           bullet={<Logo src={experience.logo} background={true} />}
           title={<CustomTitle text={experience.name} />}
+          key={experience.name}
         >
           <ItemText
             title={experience.job}
@@ -110,7 +111,7 @@ function Resume() {
         </Timeline.Item>,
 
         experience.steps.map((step) => (
-          <Timeline.Item lineVariant="dotted" bulletSize={25}>
+          <Timeline.Item lineVariant="dotted" bulletSize={25} key={step.job}>
             <ItemText
               title={step.job}
               date={step.date}
@@ -126,6 +127,7 @@ function Resume() {
         bulletSize={w > 480 ? 70 : 60}
         bullet={<Logo src={experience.logo} background={true} />}
         title={<CustomTitle text={experience.name} />}
+        key={experience.name}
       >
         <ItemText
           title={experience.job}
@@ -142,6 +144,7 @@ function Resume() {
       bullet={<Logo src={formation.logo} background={true} />}
       bulletSize={w > 480 ? 70 : 60}
       title={<CustomTitle text={formation.name} />}
+      key={formation.name}
     >
       <ItemText
         title={formation.job}
@@ -203,8 +206,8 @@ function ItemText(props) {
       >
         {Array.isArray(props.description) ? (
           <div className="descriptions">
-            {props.description.map((item) => (
-              <div>{item}</div>
+            {props.description.map((item, index) => (
+              <div key={index}>{item}</div>
             ))}
           </div>
         ) : (

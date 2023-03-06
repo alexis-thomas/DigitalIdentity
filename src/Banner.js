@@ -55,8 +55,9 @@ function Banner(props) {
             }}
             to={page.path}
             style={{ textDecoration: "none" }}
+            key={page.name}
           >
-            <div class="navlink-container">
+            <div className="navlink-container">
               <NavLink
                 label={
                   <Text size={"lg"} style={{}}>

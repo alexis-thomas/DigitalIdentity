@@ -22,8 +22,7 @@ function Achievements() {
       date: "2022",
       rank: "Rank 3",
       description:
-        "International data challenge on electric vehicules load forecasting organised by the Manifeste IA" +
-        " network of 16 French industrials and the TAILOR european project on the scientific foundations for trustworthy AI.",
+        "I teamed up with Nathan Doumèche for this international data challenge on electric vehicle load forecasting organised by the Manifeste IA network of 16 industrial companies and the TAILOR European project on the scientific foundations for trustworthy AI.",
       github: "https://github.com/NathanDoumeche/Smart_mobility_challenge",
       image: "mobility_challenge.png",
     },
@@ -69,6 +68,7 @@ function Achievements() {
           lienPdf={article.linkName}
           lienGithub={article.github}
           image={article.image}
+          key={article.name}
         />
       ))}
     </div>

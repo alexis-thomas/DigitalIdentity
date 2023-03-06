@@ -119,7 +119,7 @@ function Bio() {
           </div>
           <div>
             {" "}
-            What fascinates me most these days is cloud technologies and
+            What fascinates me most these days are cloud technologies and
             especially AWS. I enjoy working on complex cloud architectures and
             leveraging cloud services to build innovative solutions that solve
             real-world problems.
@@ -132,20 +132,21 @@ function Bio() {
             a social network website and a clothes delivery mobile app.
           </div>
           <div>
-            Thank you for visiting my website, looking forward to connecting
-            with you soon!
+            Thank you for visiting my website. I look forward to connecting with
+            you soon!
           </div>
         </div>
       </div>
       <div className="skills-container">
         <div className="skills-title">Skills</div>
 
-        <div class="skills">
+        <div className="skills">
           {skills.map((skill) => (
             <Skill
               name={skill.name}
               logo={skill.logo}
               id={skills.indexOf(skill)}
+              key={skill.name}
             />
           ))}
         </div>
