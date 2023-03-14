@@ -23,30 +23,39 @@ const icons = [Python, React, AWS, Docker, Git, Linux, SQL, TypeScript, Java];
 let skills = [
   {
     name: "Python",
+    url: "https://www.python.org/",
   },
   {
     name: "react.js",
+    url: "https://reactjs.org/",
   },
   {
     name: "AWS",
+    url: "https://aws.amazon.com/",
   },
   {
     name: "Docker",
+    url: "https://www.docker.com/",
   },
   {
     name: "Git",
+    url: "https://git-scm.com/",
   },
   {
     name: "Linux",
+    url: "https://www.linux.org/",
   },
   {
-    name: "SQL",
+    name: "PostgreSQL",
+    url: "https://www.postgresql.org/",
   },
   {
     name: "TypeScript",
+    url: "https://www.typescriptlang.org/",
   },
   {
     name: "Java",
+    url: "https://www.java.com/en/",
   },
 ];
 
@@ -91,6 +100,15 @@ function Bio() {
             href="https://github.com/alexis-thomas"
           >
             <SiGithub size={30} />
+          </a>
+          <a
+            aria-label="Gitlab"
+            className="app-logo"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://gitlab.com/alexis.thomasjutisz"
+          >
+            <SiGitlab size={30} />
           </a>
 
           {/* <a
@@ -142,12 +160,14 @@ function Bio() {
 
         <div className="skills">
           {skills.map((skill) => (
-            <Skill
-              name={skill.name}
-              logo={skill.logo}
-              id={skills.indexOf(skill)}
-              key={skill.name}
-            />
+            <a href={skill.url} style={{ textDecoration: "none" }}>
+              <Skill
+                name={skill.name}
+                logo={skill.logo}
+                id={skills.indexOf(skill)}
+                key={skill.name}
+              />
+            </a>
           ))}
         </div>
       </div>
@@ -159,7 +179,7 @@ function Skill(props) {
   const Icon = icons[props.id];
   return (
     <div className="skill">
-      <Icon height={40} width={40} />
+      <Icon height={40} width={40} alt={props.name} />
       {/* <div className="skill-name">{props.name}</div> */}
       <Text
         fz="sm"

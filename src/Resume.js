@@ -98,7 +98,13 @@ function Resume() {
         <Timeline.Item
           bulletSize={w > 480 ? 70 : 60}
           radius="md"
-          bullet={<Logo src={experience.logo} background={true} />}
+          bullet={
+            <Logo
+              name={experience.name}
+              src={experience.logo}
+              background={true}
+            />
+          }
           title={<CustomTitle text={experience.name} />}
           key={experience.name}
         >
@@ -125,7 +131,13 @@ function Resume() {
       <Timeline.Item
         lineVariant="dotted"
         bulletSize={w > 480 ? 70 : 60}
-        bullet={<Logo src={experience.logo} background={true} />}
+        bullet={
+          <Logo
+            name={experience.name}
+            src={experience.logo}
+            background={true}
+          />
+        }
         title={<CustomTitle text={experience.name} />}
         key={experience.name}
       >
@@ -141,7 +153,9 @@ function Resume() {
 
   let formation_timelines = formations.map((formation) => (
     <Timeline.Item
-      bullet={<Logo src={formation.logo} background={true} />}
+      bullet={
+        <Logo name={formation.name} src={formation.logo} background={true} />
+      }
       bulletSize={w > 480 ? 70 : 60}
       title={<CustomTitle text={formation.name} />}
       key={formation.name}
@@ -231,6 +245,7 @@ export function Logo(props) {
           height: `${w > 480 ? "4em" : "3.5em"}`,
         }}
         className="resume-img"
+        alt={props.name}
       />
     </div>
   );

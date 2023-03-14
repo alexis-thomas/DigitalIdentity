@@ -80,7 +80,7 @@ function Article(props) {
     <div className="research-container">
       {props.image && (
         <div className="research-image">
-          <Logo src={props.image} background={null} />
+          <Logo alt={props.name} src={props.image} background={null} />
         </div>
       )}
       <div className="research-left-side">

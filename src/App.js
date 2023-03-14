@@ -60,7 +60,8 @@ function App() {
               padding="xl"
               size="xs"
               color="#28232d"
-              withOverlay={false}
+              withOverlay={mobile}
+              overlayProps={{ opacity: 0 }}
               trapFocus={false}
               closeOnEscape={false}
               lockScroll={false}

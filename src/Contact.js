@@ -100,7 +100,7 @@ function Contact() {
         <TextInput
           withAsterisk
           label="Name"
-          placeholder="John Doe"
+          placeholder="Firstname Lastname"
           {...form.getInputProps("name")}
         />
 
