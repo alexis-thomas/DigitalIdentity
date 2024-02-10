@@ -5,6 +5,7 @@ import {
   IconNews,
   IconAward,
   IconAddressBook,
+  IconBulb,
   IconArticle,
 } from "@tabler/icons-react";
 import { NavLink, Text } from "@mantine/core";
@@ -20,6 +21,7 @@ function Banner(props) {
     IconSchool,
     // IconNews,
     // IconArticle,
+    IconBulb,
     IconAward,
     IconAddressBook,
   ];
@@ -27,6 +29,7 @@ function Banner(props) {
   let pages = [
     { name: "Home", path: "/" },
     { name: "Resume", path: "/resume" },
+    { name: "Projects", path: "/projects" },
     // { name: "Research & teaching", path: "/research" },
     // { name: "Articles", path: "/articles" },
     { name: "Achievements", path: "/achievements" },

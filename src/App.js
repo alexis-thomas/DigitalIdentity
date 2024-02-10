@@ -14,6 +14,8 @@ import Research from "./research";
 import Resume from "./Resume";
 import Articles from "./Articles";
 import { Notifications } from "@mantine/notifications";
+import Projects from "./Projects";
+import {Helmet} from "react-helmet";
 
 function App() {
   var w = document.documentElement.clientWidth || window.innerWidth;
@@ -41,6 +43,16 @@ function App() {
         },
       }}
     >
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Alexis Thomas</title>
+        <link rel="canonical" href="https://alexisthomas.fr" />
+        <meta name="description" content="I am a Mines Paris graduate and a Software Development Engineer at Amazon, where I have the opportunity to work on a wide range of challenging projects.
+My passion for mathematics, computer science, and software development started during my studies at Mines Paris, where I had the chance to take advanced courses in these fields. Since then, I have developed full-stack development skills in Python, Java, and TypeScript, and gained project management experience in large companies.
+What fascinates me most these days are cloud technologies and especially AWS. I enjoy working on complex cloud architectures and leveraging cloud services to build innovative solutions that solve real-world problems.
+In my free time, I enjoy learning about emerging technologies and exploring new ideas. I'm always looking for ways to improve my skills and stay up-to-date with the latest trends in software development. Among my tech projects, I recently built prototypes for a social network website, a clothes delivery mobile app and more importantly, Giftruly - a gift recommendation website and mobile app.
+Thank you for visiting my website. I look forward to connecting with you soon!" />
+      </Helmet>
       <Notifications />
       <div className="App">
         <header className="App-header">
@@ -71,6 +83,7 @@ function App() {
             <div className="main-view">
               <Routes>
                 <Route exact path="/" element={<Bio />} />
+                <Route path="/projects" element={<Projects />} />
                 <Route path="/research" element={<Research />} />
                 <Route path="/articles" element={<Articles />} />
                 <Route path="/achievements" element={<Achievements />} />

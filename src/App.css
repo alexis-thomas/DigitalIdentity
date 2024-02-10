@@ -191,6 +191,7 @@ a {
 
 .research-left-side {
   text-align: left;
+  margin-right: auto;
   padding-left: 0.3em;
 }
 
@@ -371,4 +372,124 @@ a {
   width: calc(100% - 2em);
   padding: 2em;
   border-radius: 20px;
+}
+
+
+.project-container {
+  background-color: #26212b;
+  border-radius: 1em;
+  margin: 0.5em 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  align-itrems: center;
+  padding: 1rem;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+/* .project-container:hover {
+  background-color: #393241;
+} */
+
+.project {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-image-container {
+  width: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.project-image {
+  width: 100%;
+  object-fit: cover;
+}
+
+
+.project-title {
+  font-weight: bold;
+  font-size: large;
+}
+
+.project-text {
+}
+
+.project-left-side {
+  text-align: left;
+  padding-left: 0.3em;
+  width: 100%;
+}
+
+.project-right-side {
+  margin-left: 1em;
+  display: flex;
+  gap: 1em;
+}
+
+.project-description {
+  padding-top: 1em;
+  display: none;
+}
+
+.project-button {
+  display: none;
+}
+
+.project-journal {
+  padding-top: 1em;
+}
+
+  .card-container {
+    height: 15em;
+  }
+  .project-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .project-description {
+    display: block;
+    white-space: pre-line;
+    text-align: justify;
+  }
+  .project-title {
+    font-size: larger;
+  }
+
+
+.project-date {
+  color: #a9a9a9;
+  padding-top: 0.1em;
+  text-align: justify;
+  text-justify: auto;
+}
+
+.project-img {
+  object-fit: cover;
+}
+
+.project-img-container {
+  justify-content: center;
+  border-radius: 2%;
+  align-items: center;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.project-button {
+  width: 10rem;
+  background-color: #1971c2;
+    color: white;
+  text-align: center;
+  flex-direction: column;
+
 }

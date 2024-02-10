@@ -147,7 +147,7 @@ function Bio() {
             exploring new ideas. I'm always looking for ways to improve my
             skills and stay up-to-date with the latest trends in software
             development. Among my tech projects, I recently built prototypes for
-            a social network website and a clothes delivery mobile app.
+            a social network website, a clothes delivery mobile app and more importantly, Giftruly - a gift recommendation website and mobile app.
           </div>
           <div>
             Thank you for visiting my website. I look forward to connecting with

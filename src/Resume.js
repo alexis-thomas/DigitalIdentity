@@ -6,25 +6,17 @@ function Resume() {
   let experiences = [
     {
       name: "Amazon",
-      job: "Software Development Engineer",
+      job: "Software Development Engineer II",
       date: "since march. 2022",
       logo: "amazon.png",
       description: [
-        "Owning all aspects of software development for a research team, including architecture, development, and engineering.",
-        "Developing a scalable and highly customizable solution to run a cascade of services in Docker containers with parallelization and feedback loops.",
-        "Working on multiple tools for input processing, data pipelines, and automated deployments.",
-        "Built CI/CD workflows to deploy operational research models on scalable architectures using serverless cloud technologies and containerization.",
-        "Technologies used: Python, Java, Postgres, AWS computing (EC2, Lambda, ECS, Fargate), and data storage/processing (Glue, S3, RDS, Redshift, DynamoDB, Glue).",
-      ],
-      steps: [
-        {
-          date: "march. 2022 - june. 2022",
-          job: "Software Development Engineer Intern",
-          description: [
-            "Responsible for all technical aspects of the team, including designing, implementing, and maintaining software and AWS infrastructure to support European delivery speed.",
-            "Contributed to the development of a data visualization platform used by hundreds of internal users, featuring operational research models, automated reporting, data pipelines, and big data processing.",
-          ],
-        },
+        "Responsible for software architecture, development, and engineering within a research team providing long-term vision to accelerate European delivery speed and optimize the Amazon delivery network.",
+        "Main projects: ",
+        "   - Building a platform enabling one-click execution of operational research model workflows, achieving cost-effective scalability to handle thousands of concurrent executions without pre-provisioned servers.\n",
+        "   - Input validation, sanitization, and infrastructure as code solutions, reducing production time for models and enhancing maintenance efficiency.",
+        "   - Data visualization platform with hundreds of internal users, integrating automated reporting, data pipelines, and big data processing.",
+        "   - Implemented CI/CD pipelines leveraging containerization to deploy operational research models on scalable serverless architectures.",
+        "Stack: Python, Java, PostgreSQL, and AWS services (EC2, Lambda, ECS, Fargate, Glue, S3, RDS, Redshift…)"
       ],
     },
     {
@@ -32,8 +24,8 @@ function Resume() {
       job: "Finance Project Manager",
       date: "feb. 2022 - july. 2021",
       description: [
-        "Collaborated with project managers to frame projects and monitored their progress to completion.",
-        "Provided financial and human resource estimates, identified risks and opportunities, and managed the entire BMW France project portfolio.",
+        "Collaborated with project managers to frame projects and monitored progress to completion.",
+        "Provided financial and human resources estimates, and identified risks and opportunities for the BMW France project portfolio.",
       ],
       logo: "bmw.png",
     },
@@ -50,9 +42,9 @@ function Resume() {
       job: "Software Development Engineer Intern",
       date: "june. 2020 - dec. 2020",
       description: [
-        "Created a new service that enabled customers to change the configuration of internal tools at runtime.",
-        "Responsible for the entire project lifecycle, including scoping, design, implementation, and testing.",
-        "Developed a Java backend and a React frontend.",
+        "Developed a new service allowing customers to adjust internal tool configurations in real-time.",
+        "Led end-to-end project management, including scoping, design, implementation, and testing.",
+        "Utilized Java & AWS for backend development and React for frontend design.",
       ],
 
       logo: "aws.png",
@@ -61,31 +53,18 @@ function Resume() {
 
   let formations = [
     {
-      name: "Mines Paris",
+      name: "Mines Paris - Engineering School",
+      job: "Master degree with major in computer science (Diplôme d’ingénieur civil des Mines de Paris)",
       date: "2018 - 2022",
       description:
-        "Top three French engineering schools. Advanced courses in mathematics and algorithms. Major in computer science.",
+        "One of the top three French engineering schools. Advanced courses in Mathematics and Computer Science.",
       logo: "mines.png",
     },
-    // {
-    //   name: "ULM",
-    //   date: "janv. 2018 - sept. 2022",
-    //   description:
-    //     "Master's Degree in Science and Executive Engineering, Computer Science",
-    //   logo: "ulm.jpg",
-    // },
-    // {
-    //   name: "LLG",
-    //   date: "janv. 2018 - sept. 2022",
-    //   description:
-    //     "Master's Degree in Science and Executive Engineering, Computer Science",
-    //   logo: "llg.jpg",
-    // },
     {
-      name: "Saint-Louis",
+      name: "Lycée Saint-Louis",
       date: "2016 - 2018",
       description:
-        "Two-year undergraduate courses for entrance exams to the top French engineering schools.",
+        "Two-year prep school preparing the French national competitive exams to engineering schools.",
       logo: "saint_louis.png",
     },
   ];
