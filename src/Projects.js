@@ -81,8 +81,8 @@ export function Image(props) {
             <img
                 src={props.src}
                 style={{
-                    width: `${w > 480 ? "100%" : "3.5em"}`,
-                    height: `${w > 480 ? "100%" : "3.5em"}`,
+                    width: "100%",
+                    height: "100%",
                 }}
                 className="project-img"
                 alt={props.name}
