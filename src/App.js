@@ -16,6 +16,8 @@ import Articles from "./Articles";
 import { Notifications } from "@mantine/notifications";
 import Projects from "./Projects";
 import {Helmet} from "react-helmet";
+import PrivacyPolicy from "./aura/PrivacyPolicy";
+import TermsOfService from "./aura/TermsOfService";
 
 function App() {
   var w = document.documentElement.clientWidth || window.innerWidth;
@@ -89,6 +91,8 @@ Thank you for visiting my website. I look forward to connecting with you soon!" 
                 <Route path="/achievements" element={<Achievements />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/resume" element={<Resume />} />
+                <Route path="/aura/privacypolicy" element={<PrivacyPolicy />} />
+                <Route path="/aura/termsofservice" element={<TermsOfService />} />
               </Routes>
             </div>
           </BrowserRouter>

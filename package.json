@@ -29,8 +29,8 @@
   "scripts": {
     "start": "react-scripts start",
     "predeploy": "npm run build",
-    "deploy": "aws s3 sync build/ s3://alexisthomas",
-    "invalidate": "aws cloudfront create-invalidation --distribution-id E2XOW6SZZECWR1 --paths \"/*\"",
+    "deploy": "aws s3 sync build/ s3://alexisthomas --profile Elial",
+    "invalidate": "aws cloudfront create-invalidation --distribution-id E2XOW6SZZECWR1 --paths \"/*\" --profile Elial",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
