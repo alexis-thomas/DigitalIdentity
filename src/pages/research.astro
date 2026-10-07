@@ -1,0 +1,191 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { profile, publications, awards, certifications } from "../data/profile";
+import { scholarlyNodes } from "../lib/schema";
+import { formatMonth } from "../lib/format";
+
+const title = "Research, Publications & Awards | Alexis Thomas";
+const description =
+  "Publications and awards of Alexis Thomas: a DMLR paper on EV charging forecasting (3rd place, Smarter Mobility Data Challenge) and AWS certification.";
+const paper = publications.find((p) => p.public)!;
+---
+
+<Base title={title} description={description} og="research" breadcrumbs={[{ name: "Research", path: "/research" }]} schema={scholarlyNodes()}>
+  <section class="intro graph-paper">
+    <div class="wrap">
+      <p class="label signal">§ Research</p>
+      <h1 class="hl title">Research &<br />recognition</h1>
+      <p class="lede">
+        My work sits where forecasting research meets production systems: hierarchical, neural and foundation models, rigorous evaluation, and
+        the engineering it takes to run them at scale.
+      </p>
+      <a class="btn scholar" href={profile.social.scholar} target="_blank" rel="me noopener"><Icon name="book" />Google Scholar profile<Icon name="arrowUpRight" /></a>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="r1">
+    <header class="sec-head">
+      <p class="sec-num">§ 1 · Peer-reviewed</p>
+      <h2 id="r1" class="hl h2">Publication</h2>
+      <p class="sec-meta">{paper.venue.split(" (")[0]} · {paper.year}</p>
+    </header>
+    <article class="paper">
+      <div class="paper-main">
+        <h3 class="paper-title">{paper.title}</h3>
+        <p class="authors" set:html={paper.authors!.replace("A. Thomas", "<strong>A. Thomas</strong>")} />
+        <p class="venue"><em>{paper.venue}</em>, {paper.year}.</p>
+        <div class="links">
+          {
+            paper.links!.map((l, i) => (
+              <a class:list={["btn btn-sm", { "btn-solid": i === 0 }]} href={l.url} target="_blank" rel="noopener">
+                <Icon name={l.label === "Code" ? "github" : "file"} />
+                {l.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+      <aside class="abstract">
+        <p class="label">Abstract (summary)</p>
+        <p class="serif">{paper.summary}</p>
+      </aside>
+    </article>
+  </section>
+
+  <section class="section wrap" aria-labelledby="r3">
+    <header class="sec-head">
+      <p class="sec-num">§ 2 · Recognition</p>
+      <h2 id="r3" class="hl h2">Awards & credentials</h2>
+    </header>
+    <div class="recog">
+      {
+        awards.map((a) => (
+          <article>
+            <p class="label">Award · {formatMonth(a.date)}</p>
+            <h3 class="h3">{a.title}</h3>
+            <p class="label org">{a.org}</p>
+            <p class="serif desc">{a.description}</p>
+            <a class="arrow-link" href={a.url} target="_blank" rel="noopener">
+              Challenge page
+              <Icon name="arrowUpRight" />
+            </a>
+          </article>
+        ))
+      }
+      {
+        certifications.map((c) => (
+          <article>
+            <p class="label">
+              Certification · {formatMonth(c.date)} – valid until {formatMonth(c.expires)}
+            </p>
+            <h3 class="h3">{c.name}</h3>
+            <p class="label org">{c.issuer}</p>
+            <a class="arrow-link" href={c.url} target="_blank" rel="noopener">
+              Verify credential
+              <Icon name="arrowUpRight" />
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  .intro {
+    padding-block: clamp(36px, 6vw, 72px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .title {
+    font-size: clamp(64px, 11vw, 168px);
+    line-height: 0.8;
+    margin: 18px 0 28px;
+  }
+  .intro .lede {
+    max-width: 36em;
+  }
+  .scholar {
+    margin-top: 26px;
+  }
+  .paper {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 64px);
+    border-top: 1px solid var(--rule);
+    padding-top: 26px;
+  }
+  .paper-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(28px, 3.4vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+  }
+  .authors,
+  .venue {
+    font-family: var(--serif);
+    font-size: 16.5px;
+    color: var(--ink-2);
+  }
+  .venue {
+    margin: 4px 0 22px;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .abstract {
+    border-left: 3px solid var(--signal);
+    padding-left: 20px;
+  }
+  .abstract .serif {
+    margin-top: 8px;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .big > li {
+    padding: 18px 0;
+  }
+  .big .serif {
+    margin-top: 6px;
+  }
+  .recog {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid var(--rule);
+  }
+  .recog article {
+    padding: 22px 28px 26px 0;
+  }
+  .recog article + article {
+    padding-left: 28px;
+    border-left: 1px solid var(--hair);
+  }
+  .recog .h3 {
+    margin: 8px 0 6px;
+  }
+  .org {
+    text-transform: none;
+    letter-spacing: 0.02em;
+  }
+  .desc {
+    margin: 12px 0 18px;
+    font-size: 17px;
+    color: var(--ink-2);
+  }
+  @media (max-width: 860px) {
+    .paper,
+    .recog {
+      grid-template-columns: 1fr;
+    }
+    .recog article + article {
+      padding-left: 0;
+      border-left: 0;
+      border-top: 1px solid var(--hair);
+    }
+  }
+</style>

@@ -1,0 +1,244 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { profile } from "../data/profile";
+
+const title = "Contact Alexis Thomas | Applied Scientist, London";
+const description =
+  "Get in touch with Alexis Thomas, Applied Scientist at Amazon in London, about forecasting, machine learning, cloud architecture or product collaborations.";
+---
+
+<Base title={title} description={description} og="contact" pageType="ContactPage" breadcrumbs={[{ name: "Contact", path: "/contact" }]}>
+  <section class="contact graph-paper">
+    <div class="wrap">
+      <p class="label signal">§ Contact</p>
+      <h1 class="hl title">Say hello.</h1>
+      <div class="grid">
+        <div>
+          <p class="lede">
+            Questions about my work, a project, or an opportunity? Send a message and I'll get back to you, usually within a couple of days.
+          </p>
+          <dl class="channels">
+            <div>
+              <dt class="label">Email</dt>
+              <dd><a href={`mailto:${profile.email}`}>{profile.email}</a></dd>
+            </div>
+            <div>
+              <dt class="label">LinkedIn</dt>
+              <dd><a href={profile.social.linkedin} target="_blank" rel="me noopener">in/alexis-thomas11 ↗</a></dd>
+            </div>
+            <div>
+              <dt class="label">GitHub</dt>
+              <dd><a href={profile.social.github} target="_blank" rel="me noopener">alexis-thomas ↗</a></dd>
+            </div>
+            <div>
+              <dt class="label">Based in</dt>
+              <dd>{profile.location}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <form class="form" id="contact-form" novalidate>
+          <p class="label form-head">Form 01 · Message</p>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required maxlength="120" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required maxlength="200" />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="7" required maxlength="5000"></textarea>
+          </div>
+          <!-- Honeypot: real people never see or fill this. -->
+          <div class="hp" aria-hidden="true">
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <button class="btn btn-solid submit" type="submit">
+            <span class="btn-text">Send message</span>
+            <Icon name="arrowRight" />
+          </button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+          <noscript><p class="muted">This form needs JavaScript. You can email me directly at {profile.email}.</p></noscript>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const status = form?.querySelector<HTMLElement>(".form-status");
+  const button = form?.querySelector<HTMLButtonElement>(".submit");
+  const text = button?.querySelector<HTMLElement>(".btn-text");
+
+  function setStatus(msg: string, kind: "ok" | "error" | "") {
+    if (!status) return;
+    status.textContent = msg;
+    status.dataset.kind = kind;
+  }
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    if (data.get("company")) return; // bot
+    const name = String(data.get("name") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const message = String(data.get("message") ?? "").trim();
+
+    form.querySelectorAll("[aria-invalid]").forEach((el) => el.removeAttribute("aria-invalid"));
+    const invalid: string[] = [];
+    if (!name) invalid.push("name");
+    if (!/^\S+@\S+\.\S+$/.test(email)) invalid.push("email");
+    if (!message) invalid.push("message");
+    if (invalid.length) {
+      invalid.forEach((id) => document.getElementById(id)?.setAttribute("aria-invalid", "true"));
+      document.getElementById(invalid[0])?.focus();
+      setStatus("Please fill in your name, a valid email and a message.", "error");
+      return;
+    }
+
+    button!.disabled = true;
+    text!.textContent = "Sending…";
+    setStatus("", "");
+    try {
+      const res = await fetch("https://api.alexisthomas.fr/api/contact", {
+        method: "POST",
+        body: JSON.stringify({ name, email, message }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      setStatus("Thanks, your message is on its way. I'll get back to you soon.", "ok");
+    } catch {
+      setStatus("Sorry, something went wrong. Please email me directly at contact@alexisthomas.fr.", "error");
+    } finally {
+      button!.disabled = false;
+      text!.textContent = "Send message";
+    }
+  });
+</script>
+
+<style>
+  .contact {
+    padding-block: clamp(36px, 6vw, 72px) clamp(56px, 8vw, 96px);
+  }
+  .title {
+    font-size: clamp(80px, 15vw, 220px);
+    line-height: 0.8;
+    margin: 18px 0 clamp(28px, 4vw, 48px);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: clamp(32px, 6vw, 88px);
+    align-items: start;
+  }
+  .channels {
+    margin-top: 32px;
+    border-top: 1.5px solid var(--rule);
+  }
+  .channels div {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--hair);
+    align-items: baseline;
+  }
+  .channels dd {
+    font-family: var(--serif);
+    font-size: 19px;
+    word-break: break-word;
+  }
+  .form {
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--ink);
+    padding: clamp(20px, 3vw, 32px);
+    display: grid;
+    gap: 22px;
+  }
+  .form-head {
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--hair);
+  }
+  .field {
+    display: grid;
+    gap: 6px;
+  }
+  label {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  input,
+  textarea {
+    width: 100%;
+    font-family: var(--serif);
+    font-size: 19px;
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+    border-bottom: 1.5px solid var(--ink);
+    border-radius: 0;
+    padding: 8px 0;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 150px;
+    border: 1.5px solid var(--ink);
+    padding: 10px 12px;
+  }
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--signal);
+    box-shadow: 0 2px 0 var(--signal);
+  }
+  [aria-invalid="true"] {
+    border-color: var(--signal);
+    background: var(--signal-soft);
+  }
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .submit {
+    justify-self: start;
+  }
+  .submit:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+  .form-status {
+    min-height: 1.5em;
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .form-status[data-kind="ok"] {
+    color: var(--ink);
+  }
+  .form-status[data-kind="ok"]::before {
+    content: "✓ ";
+    color: var(--signal);
+  }
+  .form-status[data-kind="error"] {
+    color: var(--signal);
+  }
+  @media (max-width: 860px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .form {
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+  }
+</style>

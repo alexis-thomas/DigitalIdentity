@@ -1,0 +1,20 @@
+---
+// Short alias: /cv -> /resume (people often type /cv).
+// redirects instantly and points search engines at the new canonical page.
+const target = "/resume";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CV | Alexis Thomas</title>
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href={`https://alexisthomas.fr${target}`} />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <script is:inline define:vars={{ target }}>location.replace(target);</script>
+  </head>
+  <body>
+    <p>The CV is at <a href={target}>alexisthomas.fr/resume</a>.</p>
+  </body>
+</html>

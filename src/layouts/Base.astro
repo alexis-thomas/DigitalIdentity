@@ -1,0 +1,184 @@
+---
+import "../styles/global.css";
+import "../styles/bands.css";
+
+// Self-hosted, Latin-only fonts: only the files this site needs, declared inline.
+import archivo from "@fontsource-variable/archivo/files/archivo-latin-standard-normal.woff2?url";
+import serif from "@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url";
+import serifItalic from "@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-italic.woff2?url";
+import mono400 from "@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2?url";
+import mono500 from "@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2?url";
+
+// Metric-matched local fallbacks (same approach as fontaine/capsize): while the
+// web fonts load, Georgia/Arial/Courier are scaled to the same width and line
+// metrics, so swapping fonts doesn't shift the layout (CLS).
+import serifMetrics from "@capsizecss/metrics/sourceSerif4";
+// @ts-expect-error capsize ships a malformed .d.ts for this one font; the runtime module is fine.
+import monoMetrics from "@capsizecss/metrics/ibmPlexMono";
+import sansMetrics from "@capsizecss/metrics/archivo";
+import georgia from "@capsizecss/metrics/georgia";
+import arial from "@capsizecss/metrics/arial";
+import courierNew from "@capsizecss/metrics/courierNew";
+
+type M = { ascent: number; descent: number; lineGap: number; unitsPerEm: number; xWidthAvg: number };
+const fallback = (name: string, local: string, font: M, fb: M) => {
+  const size = font.xWidthAvg / font.unitsPerEm / (fb.xWidthAvg / fb.unitsPerEm);
+  const pct = (v: number) => `${((Math.abs(v) / (font.unitsPerEm * size)) * 100).toFixed(2)}%`;
+  return `@font-face{font-family:"${name}";src:local("${local}");size-adjust:${(size * 100).toFixed(2)}%;ascent-override:${pct(font.ascent)};descent-override:${pct(font.descent)};line-gap-override:${pct(font.lineGap)}}`;
+};
+const fallbackFaces = [
+  fallback("Serif Fallback", "Georgia", serifMetrics, georgia),
+  fallback("Mono Fallback", "Courier New", monoMetrics, courierNew),
+  fallback("Sans Fallback", "Arial", sansMetrics, arial),
+].join("");
+
+const fontFaces = fallbackFaces + `
+@font-face{font-family:"Archivo Variable";font-style:normal;font-display:swap;font-weight:100 900;font-stretch:62% 125%;src:url(${archivo}) format("woff2")}
+@font-face{font-family:"Source Serif 4 Variable";font-style:normal;font-display:swap;font-weight:200 900;src:url(${serif}) format("woff2")}
+@font-face{font-family:"Source Serif 4 Variable";font-style:italic;font-display:swap;font-weight:200 900;src:url(${serifItalic}) format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-display:swap;font-weight:400;src:url(${mono400}) format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-display:swap;font-weight:500;src:url(${mono500}) format("woff2")}`;
+
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_URL, profile } from "../data/profile";
+import { graph, personNode, websiteNode, pageNode, breadcrumbNode } from "../lib/schema";
+
+interface Props {
+  title: string;
+  description: string;
+  /** OG image slug under /og/, e.g. "home" or "prismo" */
+  og?: string;
+  ogAlt?: string;
+  pageType?: "WebPage" | "ProfilePage" | "AboutPage" | "ContactPage" | "CollectionPage";
+  breadcrumbs?: { name: string; path: string }[];
+  schema?: unknown[];
+  noindex?: boolean;
+  /** Bare pages (legal docs) skip the site chrome entirely. */
+  bare?: boolean;
+  articleMeta?: { published?: string; modified?: string };
+}
+
+const {
+  title,
+  description,
+  og = "home",
+  ogAlt = `${profile.name}, ${profile.role} at ${profile.company}`,
+  pageType = "WebPage",
+  breadcrumbs,
+  schema = [],
+  noindex = false,
+  bare = false,
+} = Astro.props;
+
+const path = Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "") || "/";
+const canonical = path === "/" ? SITE_URL : `${SITE_URL}${path}`;
+const ogImage = `${SITE_URL}/og/${og}.png`;
+const photoUrl = `${SITE_URL}/alexis-thomas.jpg`;
+
+const jsonLd = graph(
+  personNode(photoUrl),
+  websiteNode(),
+  pageNode(pageType, canonical, title, description, { primaryImageOfPage: ogImage }),
+  ...(breadcrumbs ? [breadcrumbNode([{ name: "Home", path: "/" }, ...breadcrumbs])] : []),
+  ...schema,
+);
+---
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />}
+    <meta name="author" content={profile.name} />
+    <meta name="generator" content={Astro.generator} />
+
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0c0d0f" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-friendly summary" />
+
+    <!-- Open Graph / social -->
+    <meta property="og:type" content={og === "home" ? "profile" : "website"} />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogAlt} />
+    {og === "home" && <meta property="profile:first_name" content={profile.givenName} />}
+    {og === "home" && <meta property="profile:last_name" content={profile.familyName} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogAlt} />
+
+    <link rel="preload" href={archivo} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={fontFaces}></style>
+
+    <script is:inline>
+      // Runs before paint: apply saved theme and flag JS for progressive enhancement.
+      (function () {
+        var d = document.documentElement;
+        d.classList.remove("no-js");
+        d.classList.add("js");
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "light" || t === "dark") d.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <slot name="head" />
+  </head>
+  <body>
+    {
+      bare ? (
+        <slot />
+      ) : (
+        <>
+          <a class="skip-link" href="#main">Skip to content</a>
+          <Header />
+          <main id="main">
+            <slot />
+          </main>
+          <Footer />
+        </>
+      )
+    }
+    <script>
+      // Fade sections in as they enter the viewport. Without JS everything is visible.
+      const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
+      if ("IntersectionObserver" in window && els.length) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add("is-visible");
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add("is-visible"));
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { projects } from "../data/projects";
+---
+
+<Base title="Page not found | Alexis Thomas" description="This page doesn't exist. It may have moved." noindex>
+  <section class="nf graph-paper">
+    <div class="wrap">
+      <p class="label signal">Error 404 · Observation outside the model</p>
+      <h1 class="hl title">Outside the<br />prediction<br />interval.</h1>
+      <p class="lede">This page doesn't exist, or it has moved. Some better-calibrated destinations:</p>
+      <ul class="links">
+        <li><a class="btn btn-solid" href="/"><Icon name="arrowLeft" />Home</a></li>
+        <li><a class="btn" href="/resume">Résumé</a></li>
+        {projects.map((p) => <li><a class="btn" href={`/projects/${p.slug}`}>{p.name}</a></li>)}
+        <li><a class="btn" href="/contact">Contact</a></li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    padding-block: clamp(48px, 9vw, 120px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .title {
+    font-size: clamp(64px, 11vw, 160px);
+    line-height: 0.82;
+    margin: 18px 0 28px;
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+</style>

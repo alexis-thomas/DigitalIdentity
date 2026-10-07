@@ -1,0 +1,94 @@
+/* Per-project art direction: each product gets its own colour band. */
+[data-band] {
+  --b-bg: var(--paper-2);
+  --b-ink: var(--ink);
+  --b-muted: var(--ink-3);
+  --b-accent: var(--signal);
+  --b-rule: var(--ink);
+  background: var(--b-bg);
+  color: var(--b-ink);
+}
+
+[data-band="prismo"] {
+  --b-bg: #0b0b10;
+  --b-ink: #f5f5f7;
+  --b-muted: #a1a1aa;
+  --b-accent: #a99dff;
+  --b-rule: #f5f5f7;
+  --b-spectrum: linear-gradient(90deg, #7b6cf6, #f5609a, #ffa233, #f0d35c, #7fd27c, #2cc8d3, #56a6ee);
+}
+
+[data-band="giftruly"] {
+  --b-bg: #fde8ef;
+  --b-ink: #1f1a16;
+  --b-muted: #6f5b61;
+  --b-accent: #d0124f;
+  --b-rule: #1f1a16;
+}
+
+[data-band="aura"] {
+  --b-bg: #fbf6ec;
+  --b-ink: #3a2b3c;
+  --b-muted: #7a6a78;
+  --b-accent: #7b5cc8;
+  --b-rule: #3a2b3c;
+}
+
+:root[data-theme="dark"] [data-band="giftruly"] {
+  --b-bg: #22101a;
+  --b-ink: #fbe9ef;
+  --b-muted: #c7a3b0;
+  --b-accent: #ff4f8b;
+  --b-rule: #fbe9ef;
+}
+:root[data-theme="dark"] [data-band="aura"] {
+  --b-bg: #1c1820;
+  --b-ink: #f3ece4;
+  --b-muted: #b3a7b5;
+  --b-accent: #b9a3ef;
+  --b-rule: #f3ece4;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-band="giftruly"] {
+    --b-bg: #22101a;
+    --b-ink: #fbe9ef;
+    --b-muted: #c7a3b0;
+    --b-accent: #ff4f8b;
+    --b-rule: #fbe9ef;
+  }
+  :root:not([data-theme="light"]) [data-band="aura"] {
+    --b-bg: #1c1820;
+    --b-ink: #f3ece4;
+    --b-muted: #b3a7b5;
+    --b-accent: #b9a3ef;
+    --b-rule: #f3ece4;
+  }
+}
+
+/* Buttons inside a band follow the band's ink. */
+[data-band] .btn {
+  border-color: var(--b-ink);
+  color: var(--b-ink);
+}
+[data-band] .btn:hover {
+  background: var(--b-ink);
+  color: var(--b-bg);
+}
+[data-band] .btn-solid {
+  background: var(--b-ink);
+  color: var(--b-bg);
+}
+[data-band] .btn-solid:hover {
+  background: var(--b-accent);
+  border-color: var(--b-accent);
+  color: var(--b-bg);
+}
+[data-band] .tags {
+  color: var(--b-ink);
+}
+[data-band] .label {
+  color: var(--b-muted);
+}
+[data-band] a:hover {
+  color: var(--b-accent);
+}

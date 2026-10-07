@@ -1,0 +1,495 @@
+---
+import { Picture, Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import StoreLinks from "../../components/StoreLinks.astro";
+import ArchitectureFlow from "../../components/ArchitectureFlow.astro";
+import { projects, type Project } from "../../data/projects";
+import { SITE_URL } from "../../data/profile";
+import { projectNode } from "../../lib/schema";
+import { md } from "../../lib/format";
+
+export function getStaticPaths() {
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+interface Props {
+  project: Project;
+}
+const { project: p } = Astro.props;
+const i = projects.findIndex((x) => x.slug === p.slug);
+const next = projects[(i + 1) % projects.length];
+const url = `${SITE_URL}/projects/${p.slug}`;
+const pid = `P/${String(i + 1).padStart(2, "0")}`;
+const galleryTitle = p.slug === "aura" ? "The mood cats" : p.slug === "giftruly" ? "The app" : "Screens";
+---
+
+<Base
+  title={p.seoTitle}
+  description={p.seoDescription}
+  og={p.slug}
+  ogAlt={`${p.name}: ${p.tagline}`}
+  breadcrumbs={[
+    { name: "Projects", path: "/projects" },
+    { name: p.name, path: `/projects/${p.slug}` },
+  ]}
+  schema={[projectNode(p, url, `${SITE_URL}/og/${p.slug}.png`)]}
+>
+  <article>
+    <!-- ======================= HERO (brand band) ======================= -->
+    <header class="p-hero" data-band={p.slug}>
+      <div class="wrap">
+        <nav aria-label="Breadcrumb" class="crumbs label">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li aria-current="page">{p.name}</li>
+          </ol>
+        </nav>
+
+        <div class="p-head">
+          <div>
+            <p class="label kicker">
+              <span class="accent">Case study · {pid}</span>
+              <span>{p.status}</span>
+            </p>
+            <div class="name-row">
+              <Image src={p.icon} alt={`${p.name} app icon`} width={84} height={84} densities={[1, 2]} class="p-icon" loading="eager" />
+              <h1 class="hl p-name">{p.name}</h1>
+            </div>
+            <p class="p-tagline">{p.tagline}</p>
+            <StoreLinks links={p.links} name={p.name} />
+          </div>
+
+          <dl class="spec">
+            <div><dt class="label">Role</dt><dd>{p.role}</dd></div>
+            <div><dt class="label">Timeline</dt><dd>{p.period}</dd></div>
+            <div><dt class="label">Platforms</dt><dd>{p.platforms.join(" · ")}</dd></div>
+            <div><dt class="label">Status</dt><dd>{p.status}</dd></div>
+          </dl>
+        </div>
+
+        <figure class="cover">
+          <Picture
+            src={p.cover}
+            formats={["avif"]}
+            fallbackFormat="webp"
+            widths={[640, 960, 1280, 1600]}
+            sizes="(max-width: 1280px) 100vw, 1200px"
+            alt={p.coverAlt}
+            loading="eager"
+            fetchpriority="high"
+          />
+          <figcaption class="label"><span class="accent">Fig. 1</span> {p.coverCaption ?? `${p.name}`}</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <div class="wrap">
+      <ul class="figures nums">
+        {
+          p.numbers.map((n) => (
+            <li>
+              <p class="fig-value">{n.value}</p>
+              <p class="fig-label">{n.label}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- ============================ OVERVIEW =========================== -->
+    <section class="section wrap" aria-labelledby="overview">
+      <header class="sec-head">
+        <p class="sec-num">§ 1 · Overview</p>
+        <h2 id="overview" class="hl h2">The product</h2>
+      </header>
+      <div class="two-col">
+        <div class="prose">
+          {p.overview.map((para, k) => <p class:list={{ lede: k === 0 }} set:html={md(para)} />)}
+        </div>
+        <div>
+          <p class="label">Key features</p>
+          <ol class="numbered features">
+            {p.features.map((f) => <li set:html={md(f)} />)}
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================== ENGINEERING ========================= -->
+    <section class="section wrap" aria-labelledby="engineering">
+      <header class="sec-head">
+        <p class="sec-num">§ 2 · Engineering</p>
+        <h2 id="engineering" class="hl h2">How it's built</h2>
+      </header>
+      <ArchitectureFlow title={p.architecture.title} lanes={p.architecture.lanes} note={p.architecture.note} />
+      <ol class="highlights">
+        {
+          p.highlights.map((h, k) => (
+            <li class="hl-item" data-reveal>
+              <span class="hl hl-n">{String(k + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 class="h3">{h.title}</h3>
+                <p class="hl-body serif" set:html={md(h.body)} />
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <!-- ============================= GALLERY =========================== -->
+    {
+      p.gallery.length > 0 && (
+        <section class="section gallery-section" data-band={p.slug} aria-labelledby="gallery">
+          <div class="wrap">
+            <header class="sec-head band-head">
+              <p class="sec-num">§ 3 · Gallery</p>
+              <h2 id="gallery" class="hl h2">
+                {galleryTitle}
+              </h2>
+            </header>
+            <ul class:list={["gallery", p.galleryLayout]} role="list">
+              {p.gallery.map((g) => (
+                <li>
+                  <figure>
+                    <Picture
+                      src={g.src}
+                      formats={["avif"]}
+                      fallbackFormat="webp"
+                      widths={g.phone ? [260, 400, 560] : p.galleryLayout === "row" ? [200, 320, 480] : [640, 960, 1400]}
+                      sizes={
+                        g.phone ? "(max-width: 640px) 70vw, 260px" : p.galleryLayout === "row" ? "(max-width: 640px) 45vw, 220px" : "(max-width: 860px) 100vw, 860px"
+                      }
+                      alt={g.alt}
+                      loading="lazy"
+                    />
+                    {g.caption && <figcaption class="label">{g.caption}</figcaption>}
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )
+    }
+
+    <!-- ============================== STACK ============================ -->
+    <section class="section wrap" aria-labelledby="stack">
+      <header class="sec-head">
+        <p class="sec-num">§ 4 · Stack</p>
+        <h2 id="stack" class="hl h2">Tools & services</h2>
+      </header>
+      <table class="stack">
+        <caption class="sr-only">{p.name} technology stack</caption>
+        <tbody>
+          {
+            p.stack.map((s) => (
+              <tr>
+                <th scope="row" class="label">
+                  {s.group}
+                </th>
+                <td>
+                  <ul class="tags">
+                    {s.items.map((it) => (
+                      <li>{it}</li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============================== NEXT ============================= -->
+    <nav aria-label="Next project">
+      <a href={`/projects/${next.slug}`} class="next" data-band={next.slug}>
+        <span class="wrap next-inner">
+          <span class="label">Next case study →</span>
+          <span class="hl next-name">{next.name}</span>
+          <span class="next-tag">{next.tagline}</span>
+        </span>
+      </a>
+    </nav>
+  </article>
+</Base>
+
+<style>
+  /* ---------- hero band ---------- */
+  .p-hero {
+    position: relative;
+    padding-top: 22px;
+    padding-bottom: clamp(32px, 5vw, 64px);
+    border-bottom: 1px solid var(--b-rule);
+  }
+  .p-hero[data-band="prismo"]::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 4px;
+    background: var(--b-spectrum);
+  }
+  .crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .crumbs li + li::before {
+    content: "/";
+    margin-right: 8px;
+    opacity: 0.5;
+  }
+  .crumbs a {
+    text-decoration: none;
+    color: inherit;
+  }
+  .p-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 72px);
+    align-items: end;
+    margin-top: clamp(28px, 4vw, 48px);
+  }
+  .kicker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin-bottom: 16px;
+  }
+  .accent {
+    color: var(--b-accent);
+  }
+  .name-row {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2vw, 26px);
+    margin-bottom: 22px;
+  }
+  .name-row :global(.p-icon) {
+    width: clamp(56px, 7vw, 84px);
+    height: auto;
+    border-radius: 22%;
+    flex: none;
+  }
+  .p-name {
+    font-size: clamp(76px, 13vw, 190px);
+    line-height: 0.8;
+  }
+  .p-tagline {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.1vw, 26px);
+    line-height: 1.4;
+    max-width: 30em;
+    margin-bottom: 28px;
+  }
+  .spec {
+    border-top: 1.5px solid var(--b-rule);
+  }
+  .spec div {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--b-rule) 25%, transparent);
+  }
+  .spec dt {
+    padding-top: 2px;
+  }
+  .spec dd {
+    font-size: 15px;
+  }
+  .cover {
+    margin-top: clamp(32px, 5vw, 56px);
+  }
+  .cover :global(img) {
+    width: 100%;
+    border: 1px solid color-mix(in srgb, var(--b-rule) 35%, transparent);
+  }
+  .cover figcaption {
+    margin-top: 10px;
+  }
+
+  .nums {
+    margin-top: clamp(40px, 6vw, 64px);
+  }
+
+  /* ---------- overview ---------- */
+  .two-col {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 72px);
+    align-items: start;
+  }
+  .features {
+    margin-top: 12px;
+    font-size: 15.5px;
+  }
+
+  /* ---------- highlights ---------- */
+  .highlights {
+    margin-top: clamp(40px, 6vw, 64px);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 clamp(28px, 5vw, 64px);
+  }
+  .hl-item {
+    display: grid;
+    grid-template-columns: 76px 1fr;
+    gap: 14px;
+    padding: 22px 0 26px;
+    border-top: 1px solid var(--rule);
+  }
+  .hl-n {
+    font-size: 58px;
+    line-height: 0.82;
+    color: var(--signal);
+  }
+  .hl-item .h3 {
+    margin-bottom: 10px;
+  }
+  .hl-body {
+    font-size: 17px;
+    line-height: 1.58;
+    color: var(--ink-2);
+  }
+
+  /* ---------- gallery ---------- */
+  .gallery-section {
+    border-top: 1px solid var(--b-rule);
+    border-bottom: 1px solid var(--b-rule);
+  }
+  .band-head {
+    border-top-color: var(--b-rule);
+  }
+  .band-head .sec-num {
+    color: var(--b-accent);
+  }
+  .gallery {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+  .gallery li {
+    flex: none;
+    scroll-snap-align: start;
+  }
+  .gallery.phones li {
+    width: clamp(200px, 21vw, 250px);
+  }
+  .gallery.row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    overflow: visible;
+  }
+  .gallery.row :global(img) {
+    background: #fbf7ef;
+    border: 1px solid color-mix(in srgb, var(--b-rule) 30%, transparent);
+  }
+  .gallery.mixed {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 32px;
+    align-items: start;
+    overflow: visible;
+  }
+  .gallery.mixed li:not(:first-child) :global(img) {
+    border: 1px solid color-mix(in srgb, var(--b-rule) 30%, transparent);
+  }
+  .gallery figcaption {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  /* ---------- stack ---------- */
+  .stack {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--rule);
+  }
+  .stack th {
+    text-align: left;
+    vertical-align: top;
+    width: 220px;
+    padding: 14px 16px 14px 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  .stack td {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  .stack .tags {
+    font-size: 13.5px;
+  }
+
+  /* ---------- next ---------- */
+  .next {
+    display: block;
+    text-decoration: none;
+    border-top: 1px solid var(--b-rule);
+    padding-block: clamp(40px, 6vw, 72px);
+    position: relative;
+  }
+  .next[data-band="prismo"]::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 4px;
+    background: var(--b-spectrum);
+  }
+  .next-inner {
+    display: grid;
+    gap: 10px;
+  }
+  .next-name {
+    font-size: clamp(64px, 11vw, 160px);
+    line-height: 0.82;
+    transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .next:hover .next-name {
+    transform: translateX(12px);
+    color: var(--b-accent);
+  }
+  .next-tag {
+    font-family: var(--serif);
+    font-size: 19px;
+    max-width: 36em;
+  }
+
+  @media (max-width: 960px) {
+    .p-head,
+    .two-col,
+    .highlights {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 760px) {
+    .gallery.row {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .gallery.mixed {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+    .gallery.mixed li:first-child {
+      width: 240px;
+    }
+    .stack th {
+      width: 120px;
+    }
+    .hl-item {
+      grid-template-columns: 56px 1fr;
+    }
+    .hl-n {
+      font-size: 44px;
+    }
+  }
+</style>

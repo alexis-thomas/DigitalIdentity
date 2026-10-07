@@ -1,0 +1,40 @@
+---
+import Icon from "./Icon.astro";
+import type { Link } from "../data/projects";
+
+interface Props {
+  links: Link[];
+  name: string;
+}
+const { links, name } = Astro.props;
+const icon = { web: "globe", appstore: "apple", play: "play", code: "code" } as const;
+const prefix = { web: "Visit", appstore: "Download on the", play: "Get it on", code: "View" } as const;
+---
+
+<ul class="store-links">
+  {
+    links.map((l, i) => (
+      <li>
+        <a class:list={["btn", { "btn-solid": i === 0 }]} href={l.url} target="_blank" rel="noopener">
+          <Icon name={icon[l.kind]} />
+          <span>
+            <span class="sr-only">
+              {prefix[l.kind]} {name}:{" "}
+            </span>
+            {l.label}
+          </span>
+          <Icon name="arrowUpRight" size={14} />
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .store-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+</style>

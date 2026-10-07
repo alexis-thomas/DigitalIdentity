@@ -1,0 +1,258 @@
+---
+import Icon from "./Icon.astro";
+import Logo from "./Logo.astro";
+
+const nav = [
+  { label: "Projects", href: "/projects" },
+  { label: "Résumé", href: "/resume" },
+  { label: "Research", href: "/research" },
+  { label: "Contact", href: "/contact" },
+];
+
+const path = Astro.url.pathname.replace(/\.html$/, "");
+const isActive = (href: string) => path === href || path.startsWith(href + "/");
+---
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a href="/" class="brand" aria-label="Alexis Thomas, home">
+      <Logo size={26} />
+      <span class="brand-name">Alexis Thomas</span>
+    </a>
+
+    <p class="clock label" aria-hidden="true">
+      <span>London</span> <time data-clock>--:--</time>
+    </p>
+
+    <nav aria-label="Main" class="nav-desktop">
+      <ul>
+        {
+          nav.map((n, i) => (
+            <li>
+              <a href={n.href} aria-current={isActive(n.href) ? "page" : undefined}>
+                <span class="idx">{String(i + 1).padStart(2, "0")}</span>
+                {n.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <button class="icon-btn" type="button" aria-label="Toggle dark mode" data-theme-toggle>
+      <Icon name="sun" class="i-sun" size={17} />
+      <Icon name="moon" class="i-moon" size={17} />
+    </button>
+
+    <details class="nav-mobile">
+      <summary class="icon-btn" aria-label="Open menu">
+        <Icon name="menu" class="i-open" size={18} />
+        <Icon name="close" class="i-close" size={18} />
+      </summary>
+      <nav aria-label="Main (mobile)">
+        <ul>
+          <li><a href="/" aria-current={path === "/" ? "page" : undefined}><span class="idx">00</span>Home</a></li>
+          {
+            nav.map((n, i) => (
+              <li>
+                <a href={n.href} aria-current={isActive(n.href) ? "page" : undefined}>
+                  <span class="idx">{String(i + 1).padStart(2, "0")}</span>
+                  {n.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<script>
+  const root = document.documentElement;
+  const current = () =>
+    root.getAttribute("data-theme") ?? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => {
+    const next = current() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem("theme", next);
+    } catch {}
+  });
+
+  const menu = document.querySelector<HTMLDetailsElement>(".nav-mobile");
+  document.addEventListener("click", (e) => {
+    if (menu?.open && !menu.contains(e.target as Node)) menu.open = false;
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menu?.open) menu.open = false;
+  });
+
+  // Local time in London.
+  const clock = document.querySelector<HTMLTimeElement>("[data-clock]");
+  if (clock) {
+    const fmt = new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/London" });
+    const tick = () => (clock.textContent = fmt.format(new Date()));
+    tick();
+    setInterval(tick, 15000);
+  }
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .bar {
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .brand:hover {
+    color: var(--ink);
+  }
+  .brand-name {
+    font-family: var(--display);
+    font-weight: 820;
+    font-stretch: 70%;
+    font-size: 21px;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    line-height: 1;
+  }
+  .clock {
+    margin-right: auto;
+    padding-left: 16px;
+    border-left: 1px solid var(--hair);
+    font-size: 11.5px;
+  }
+  .clock time {
+    color: var(--ink);
+  }
+  .nav-desktop ul {
+    display: flex;
+    gap: 2px;
+  }
+  .nav-desktop a,
+  .nav-mobile a {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 6px 10px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .idx {
+    font-size: 10.5px;
+    color: var(--ink-3);
+  }
+  .nav-desktop a:hover {
+    color: var(--signal);
+  }
+  .nav-desktop a[aria-current="page"],
+  .nav-mobile a[aria-current="page"] {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .nav-desktop a[aria-current="page"] .idx,
+  .nav-mobile a[aria-current="page"] .idx {
+    color: var(--signal);
+  }
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border: 1.5px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .icon-btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .icon-btn :global(.i-moon) {
+    display: none;
+  }
+  :global(:root[data-theme="dark"]) .icon-btn :global(.i-sun) {
+    display: none;
+  }
+  :global(:root[data-theme="dark"]) .icon-btn :global(.i-moon) {
+    display: block;
+  }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .icon-btn :global(.i-sun) {
+      display: none;
+    }
+    :global(:root:not([data-theme="light"])) .icon-btn :global(.i-moon) {
+      display: block;
+    }
+  }
+  .nav-mobile {
+    display: none;
+    position: relative;
+  }
+  .nav-mobile summary {
+    list-style: none;
+  }
+  .nav-mobile summary::-webkit-details-marker {
+    display: none;
+  }
+  .nav-mobile :global(.i-close),
+  .nav-mobile[open] :global(.i-open) {
+    display: none;
+  }
+  .nav-mobile[open] :global(.i-close) {
+    display: block;
+  }
+  .nav-mobile nav {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 11px);
+    min-width: 220px;
+    background: var(--paper);
+    border: 1.5px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+    padding: 6px;
+  }
+  .nav-mobile a {
+    padding: 12px;
+    font-size: 14px;
+  }
+  @media (max-width: 860px) {
+    .nav-desktop {
+      display: none;
+    }
+    .nav-mobile {
+      display: block;
+    }
+  }
+  @media (max-width: 520px) {
+    .clock {
+      display: none;
+    }
+    .brand {
+      margin-right: auto;
+    }
+  }
+</style>

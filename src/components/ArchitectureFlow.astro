@@ -1,0 +1,135 @@
+---
+// Architecture schematic: lanes left-to-right on desktop, top-to-bottom on mobile.
+// Plain HTML (not an image), so it stays readable, selectable and indexable.
+import type { Lane } from "../data/projects";
+
+interface Props {
+  title: string;
+  lanes: Lane[];
+  note?: string;
+  fig?: string;
+}
+const { title, lanes, note, fig = "Fig. 2" } = Astro.props;
+---
+
+<figure class="arch">
+  <div class="sheet graph-paper">
+    <ol class="lanes">
+      {
+        lanes.map((lane, i) => (
+          <li class="lane">
+            <p class="lane-label">
+              <span class="step">{String(i + 1).padStart(2, "0")}</span>
+              {lane.label}
+            </p>
+            <ul class="nodes">
+              {lane.nodes.map((n) => (
+                <li class="node">{n}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+  <figcaption class="caption">
+    <span class="signal">{fig}</span>
+    {title}.{note && ` ${note}`}
+  </figcaption>
+</figure>
+
+<style>
+  .sheet {
+    border: 1.5px solid var(--rule);
+    padding: clamp(18px, 3vw, 30px);
+    background-color: var(--paper);
+  }
+  .lanes {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 40px;
+  }
+  .lane {
+    position: relative;
+  }
+  .lane + .lane::before {
+    content: "";
+    position: absolute;
+    left: -34px;
+    top: calc(50% + 14px);
+    width: 28px;
+    height: 1.5px;
+    background: var(--ink);
+  }
+  .lane + .lane::after {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: calc(50% + 10px);
+    border: 5px solid transparent;
+    border-left: 7px solid var(--ink);
+    border-right: 0;
+  }
+  .lane-label {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    border-bottom: 1.5px solid var(--rule);
+  }
+  .step {
+    color: var(--signal);
+  }
+  .nodes {
+    display: grid;
+    gap: 6px;
+  }
+  .node {
+    padding: 8px 10px;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.35;
+  }
+  .node:first-child {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .caption {
+    margin-top: 10px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink-3);
+  }
+  @media (max-width: 860px) {
+    .lanes {
+      grid-auto-flow: row;
+      gap: 34px;
+    }
+    .lane + .lane::before {
+      left: 16px;
+      top: -28px;
+      width: 1.5px;
+      height: 22px;
+    }
+    .lane + .lane::after {
+      left: 12px;
+      top: -10px;
+      border: 5px solid transparent;
+      border-top: 7px solid var(--ink);
+      border-bottom: 0;
+    }
+    .nodes {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+  }
+</style>

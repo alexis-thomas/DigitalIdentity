@@ -1,0 +1,294 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import Experience from "../components/Experience.astro";
+import { profile, education, certifications, publications, awards, skills, interests } from "../data/profile";
+import { projects } from "../data/projects";
+import { formatMonth } from "../lib/format";
+
+const title = "Alexis Thomas CV / Résumé – Applied Scientist & ML Engineer";
+const description =
+  "CV of Alexis Thomas: Applied Scientist II at Amazon (demand forecasting, ML), ex-SDE II, AWS Solutions Architect Professional, Mines Paris – PSL. PDF download.";
+---
+
+<Base title={title} description={description} og="resume" pageType="ProfilePage" breadcrumbs={[{ name: "Résumé", path: "/resume" }]}>
+  <div class="wrap resume">
+    <header class="r-head">
+      <div class="r-top">
+        <p class="label signal no-print">§ Résumé / CV · Updated {formatMonth(`${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}`)}</p>
+        <div class="r-actions no-print">
+          <a class="btn btn-solid btn-sm" href="/Alexis-Thomas-Resume.pdf" download="Alexis-Thomas-Resume.pdf"><Icon name="download" />Download PDF</a>
+          <a class="btn btn-sm" href="/contact"><Icon name="mail" />Contact</a>
+        </div>
+      </div>
+      <h1 class="hl r-name">Alexis Thomas</h1>
+      <div class="r-sub">
+        <p class="lede">
+          <strong>{profile.role} at {profile.company}.</strong> Applied scientist with expertise in statistical modeling, time series
+          forecasting, software engineering and cloud architecture.
+        </p>
+        <dl class="r-contact">
+          <div><dt class="label">Location</dt><dd>{profile.location}</dd></div>
+          <div><dt class="label">Email</dt><dd><a href={`mailto:${profile.email}`}>{profile.email}</a></dd></div>
+          <div><dt class="label">LinkedIn</dt><dd><a href={profile.social.linkedin}>in/alexis-thomas11</a></dd></div>
+          <div><dt class="label">Scholar</dt><dd><a href={profile.social.scholar}>Google Scholar</a></dd></div>
+          <div><dt class="label">Web</dt><dd><a href="/">alexisthomas.fr</a></dd></div>
+        </dl>
+      </div>
+    </header>
+
+    <section class="r-section" id="r-xp" aria-labelledby="h-xp">
+      <h2 id="h-xp" class="r-h2"><span class="signal">01</span> Experience</h2>
+      <Experience />
+    </section>
+
+    <section class="r-section" id="r-edu" aria-labelledby="h-edu">
+      <h2 id="h-edu" class="r-h2"><span class="signal">02</span> Education</h2>
+      <ul class="rows">
+        {
+          education.map((e) => (
+            <li class="row">
+              <p class="when mono">
+                {e.start} – {e.end}
+                <span class="where">{e.location}</span>
+              </p>
+              <div>
+                <h3 class="h3">{e.school}</h3>
+                <p class="row-main">{e.degree}</p>
+                <p class="row-note">{e.note}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="r-section" aria-labelledby="h-skills">
+      <h2 id="h-skills" class="r-h2"><span class="signal">03</span> Skills</h2>
+      <ul class="rows">
+        {
+          skills.map((s) => (
+            <li class="row">
+              <p class="label">{s.group}</p>
+              <ul class="tags">
+                {s.items.map((it) => (
+                  <li>{it}</li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+        <li class="row">
+          <p class="label">Languages</p>
+          <ul class="tags">{profile.languages.map((l) => <li>{l.name} ({l.level.toLowerCase()})</li>)}</ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="r-section" aria-labelledby="h-pub">
+      <h2 id="h-pub" class="r-h2"><span class="signal">04</span> Publications, awards & certifications</h2>
+      <ul class="rows">
+        {
+          publications.map((p) => (
+            <li class="row">
+              <p class="when mono">{p.year ?? "Internal"}</p>
+              <div>
+                {p.public ? (
+                  <a class="row-title" href={p.links![0].url} target="_blank" rel="noopener">
+                    {p.title}
+                  </a>
+                ) : (
+                  <span class="row-title">{p.title}</span>
+                )}
+                <p class="row-note">{p.venue}</p>
+              </div>
+            </li>
+          ))
+        }
+        {
+          awards.map((a) => (
+            <li class="row">
+              <p class="when mono">{formatMonth(a.date)}</p>
+              <div>
+                <span class="row-title">{a.title}</span>
+                <p class="row-note">{a.org}</p>
+              </div>
+            </li>
+          ))
+        }
+        {
+          certifications.map((c) => (
+            <li class="row">
+              <p class="when mono">{formatMonth(c.date)}</p>
+              <div>
+                <a class="row-title" href={c.url} target="_blank" rel="noopener">
+                  {c.name}
+                </a>
+                <p class="row-note">
+                  {c.issuer}, valid until {formatMonth(c.expires)}
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="r-section" aria-labelledby="h-proj">
+      <h2 id="h-proj" class="r-h2"><span class="signal">05</span> Side projects</h2>
+      <ul class="rows">
+        {
+          projects.map((p) => (
+            <li class="row">
+              <p class="when mono">{p.period}</p>
+              <div>
+                <a class="row-title" href={`/projects/${p.slug}`}>
+                  {p.name}
+                </a>
+                <span class="label"> · {p.status}</span>
+                <p class="row-note">{p.tagline}</p>
+              </div>
+            </li>
+          ))
+        }
+        <li class="row">
+          <p class="label">Interests</p>
+          <p class="row-note">{interests.join(", ")}</p>
+        </li>
+      </ul>
+    </section>
+  </div>
+</Base>
+
+
+<style>
+  .resume {
+    max-width: 1040px;
+    padding-block: clamp(24px, 4vw, 48px) clamp(40px, 6vw, 80px);
+  }
+  .r-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .r-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .r-name {
+    font-size: clamp(72px, 12vw, 168px);
+    line-height: 0.8;
+    margin: 22px 0 26px;
+  }
+  .r-sub {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 56px);
+    align-items: start;
+    padding-bottom: 8px;
+  }
+  .r-contact {
+    border-top: 1.5px solid var(--rule);
+  }
+  .r-contact div {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--hair);
+    font-size: 15px;
+    align-items: baseline;
+  }
+  .r-section {
+    padding-top: clamp(36px, 5vw, 56px);
+  }
+  .r-h2 {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-top: 10px;
+    border-top: 3px solid var(--rule);
+    margin-bottom: 22px;
+  }
+  .rows {
+    border-top: 1.5px solid var(--rule);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 20px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--hair);
+    align-items: baseline;
+  }
+  .when {
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+  .where {
+    display: block;
+    color: var(--ink-3);
+  }
+  .row-main {
+    margin-top: 2px;
+  }
+  .row-title {
+    font-weight: 650;
+    font-size: 17px;
+    text-decoration: none;
+  }
+  a.row-title:hover {
+    color: var(--signal);
+  }
+  .row-note {
+    font-family: var(--serif);
+    color: var(--ink-2);
+    font-size: 16px;
+    margin-top: 2px;
+  }
+  @media (max-width: 760px) {
+    .r-sub {
+      grid-template-columns: 1fr;
+    }
+    .row {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+  @media print {
+    @page {
+      margin: 13mm;
+    }
+    .resume {
+      padding: 0;
+      max-width: none;
+    }
+    .r-name {
+      font-size: 34pt;
+      margin: 0 0 8pt;
+    }
+    .r-section {
+      padding-top: 12pt;
+    }
+    .r-h2 {
+      margin-bottom: 6pt;
+    }
+    .row {
+      grid-template-columns: 110pt 1fr;
+      padding: 5pt 0;
+      break-inside: avoid;
+    }
+    .lede {
+      font-size: 11pt;
+    }
+  }
+</style>

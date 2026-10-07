@@ -1,0 +1,20 @@
+---
+// Legacy URL from the previous site. S3 can't send a real 301, so this page
+// redirects instantly and points search engines at the new canonical page.
+const target = "/research";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Moved to Research | Alexis Thomas</title>
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href={`https://alexisthomas.fr${target}`} />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <script is:inline define:vars={{ target }}>location.replace(target);</script>
+  </head>
+  <body>
+    <p>This page has moved to <a href={target}>Research &amp; recognition</a>.</p>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+---
+import Base from "./Base.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  html: string;
+  path: string;
+}
+const { title, description, heading, html, path } = Astro.props;
+---
+
+<Base title={title} description={description} breadcrumbs={[{ name: "Aura", path: "/projects/aura" }, { name: heading, path }]}>
+  <article class="legal wrap">
+    <p class="label"><a href="/projects/aura">Aura</a> · Legal</p>
+    <h1 class="hl title">{heading}</h1>
+    <div class="legal-body" set:html={html} />
+  </article>
+</Base>
+
+<style>
+  .legal {
+    max-width: 820px;
+    padding-block: clamp(32px, 6vw, 72px);
+  }
+  .label a {
+    color: inherit;
+  }
+  .title {
+    font-size: clamp(44px, 7vw, 80px);
+    margin: 14px 0 28px;
+    padding-bottom: 18px;
+    border-bottom: 3px solid var(--rule);
+  }
+  .legal-body {
+    font-family: var(--serif);
+    font-size: 17.5px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .legal-body :global(p) {
+    margin-bottom: 1em;
+  }
+  /* The source HTML repeats the title in its first <strong>; hide it under our h1. */
+  .legal-body > :global(strong:first-child) {
+    display: none;
+  }
+  .legal-body :global(strong) {
+    display: block;
+    margin: 30px 0 8px;
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 650;
+    color: var(--ink);
+  }
+  .legal-body :global(br) {
+    display: none;
+  }
+  .legal-body :global(ul) {
+    list-style: square;
+    padding-left: 22px;
+    margin-bottom: 1em;
+  }
+  .legal-body :global(li) {
+    margin-bottom: 6px;
+  }
+  .legal-body :global(hr) {
+    border: 0;
+    border-top: 1px solid var(--hair);
+    margin-top: 32px;
+  }
+</style>

@@ -1,0 +1,188 @@
+---
+import Icon from "./Icon.astro";
+import { profile } from "../data/profile";
+import { projects } from "../data/projects";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="talk-outer">
+  <section class="wrap talk" aria-labelledby="talk-title">
+    <p class="label signal">§ End of report · Contact</p>
+    <h2 id="talk-title" class="hl talk-title">
+      <a href="/contact">Let's talk<span class="arrow" aria-hidden="true">→</span></a>
+    </h2>
+    <div class="talk-row">
+      <p class="lede">Forecasting, ML systems, cloud architecture or products. I'm always happy to compare notes.</p>
+      <div class="talk-actions">
+        <a class="email" href={`mailto:${profile.email}`}>{profile.email}</a>
+        <button class="btn btn-sm" type="button" data-copy={profile.email}>
+          <Icon name="copy" size={15} /><span>Copy</span>
+        </button>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <div class="wrap cols">
+    <div>
+      <p class="label">Profiles</p>
+      <ul>
+        <li><a href={profile.social.linkedin} rel="me noopener" target="_blank">LinkedIn ↗</a></li>
+        <li><a href={profile.social.scholar} rel="me noopener" target="_blank">Google Scholar ↗</a></li>
+        <li><a href={profile.social.github} rel="me noopener" target="_blank">GitHub ↗</a></li>
+        <li><a href={profile.social.gitlab} rel="me noopener" target="_blank">GitLab ↗</a></li>
+      </ul>
+    </div>
+    <nav aria-label="Footer: site">
+      <p class="label">Site</p>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/resume">Résumé / CV</a></li>
+        <li><a href="/research">Research</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Footer: projects">
+      <p class="label">Projects</p>
+      <ul>
+        {projects.map((p) => <li><a href={`/projects/${p.slug}`}>{p.name}</a></li>)}
+      </ul>
+    </nav>
+    <nav aria-label="Footer: legal">
+      <p class="label">Aura legal</p>
+      <ul>
+        <li><a href="/aura/privacypolicy">Privacy policy</a></li>
+        <li><a href="/aura/termsofservice">Terms of service</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="base-outer">
+    <div class="wrap base">
+      <p>© {year} {profile.name}</p>
+      <p>{profile.role} · {profile.company} · {profile.locality}</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const label = btn.querySelector("span")!;
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy!);
+        label.textContent = "Copied";
+      } catch {
+        label.textContent = "Press Ctrl+C";
+      }
+      setTimeout(() => (label.textContent = "Copy"), 1800);
+    });
+  });
+</script>
+
+<style>
+  .site-footer {
+    border-top: 3px solid var(--rule);
+    margin-top: clamp(40px, 6vw, 80px);
+  }
+  .talk-outer {
+    border-bottom: 1px solid var(--rule);
+  }
+  .talk {
+    padding-block: clamp(40px, 6vw, 72px) clamp(40px, 5vw, 56px);
+  }
+  .talk-title {
+    font-size: calc((min(100vw, var(--max)) - 2 * var(--gutter)) / 5.3);
+    font-stretch: 62%;
+    white-space: nowrap;
+    line-height: 0.82;
+    margin: 18px 0 28px;
+    letter-spacing: -0.015em;
+  }
+  .talk-title a {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.12em;
+  }
+  .arrow {
+    color: var(--signal);
+    font-stretch: 100%;
+    transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .talk-title a:hover {
+    color: var(--ink);
+  }
+  .talk-title a:hover .arrow {
+    transform: translateX(0.12em);
+  }
+  .talk-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px 48px;
+    align-items: end;
+  }
+  .talk-row .lede {
+    max-width: 30em;
+    color: var(--ink-2);
+  }
+  .talk-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .email {
+    font-family: var(--serif);
+    font-size: clamp(20px, 2.4vw, 28px);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.2em;
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    padding-block: 36px;
+  }
+  .cols ul {
+    margin-top: 12px;
+    display: grid;
+    gap: 6px;
+  }
+  .cols a {
+    text-decoration: none;
+    font-size: 15px;
+  }
+  .base-outer {
+    border-top: 1px solid var(--hair);
+  }
+  .base {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px 24px;
+    flex-wrap: wrap;
+    padding-block: 16px 22px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  @media (max-width: 640px) {
+    .talk-title {
+      white-space: normal;
+      font-size: clamp(72px, 30vw, 160px);
+    }
+  }
+  @media (max-width: 860px) {
+    .talk-row {
+      grid-template-columns: 1fr;
+    }
+    .cols {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,182 @@
+---
+import { Picture } from "astro:assets";
+import Icon from "./Icon.astro";
+import type { Project } from "../data/projects";
+
+interface Props {
+  project: Project;
+  index: number;
+  headingLevel?: "h2" | "h3";
+  eager?: boolean;
+}
+const { project: p, index, headingLevel = "h3", eager = false } = Astro.props;
+const H = headingLevel;
+const store = p.links.find((l) => l.kind !== "web") ?? p.links[0];
+const position = p.slug === "prismo" ? "left center" : "top center";
+---
+
+<section class="band" data-band={p.slug} aria-labelledby={`band-${p.slug}`}>
+  <div class="wrap band-grid">
+    <div class="b-text" data-reveal>
+      <p class="label b-kicker">
+        <span class="b-idx">P/{String(index + 1).padStart(2, "0")}</span>
+        <span>{p.period}</span>
+        <span class="b-status">{p.status}</span>
+      </p>
+      <H id={`band-${p.slug}`} class="hl b-name"><a href={`/projects/${p.slug}`}>{p.name}</a></H>
+      <p class="b-tag">{p.tagline}</p>
+      <dl class="b-nums">
+        {
+          p.numbers.slice(0, 3).map((n) => (
+            <div>
+              <dt class="sr-only">{n.label}</dt>
+              <dd>
+                <span class="b-num">{n.value}</span>
+                <span class="b-num-label">{n.label}</span>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+      <ul class="tags">
+        {p.stack.flatMap((s) => s.items).slice(0, 7).map((s) => <li>{s}</li>)}
+      </ul>
+      <div class="b-cta">
+        <a class="btn btn-solid" href={`/projects/${p.slug}`}>Case study<span class="sr-only">: {p.name}</span><Icon name="arrowRight" /></a>
+        <a class="btn" href={store.url} target="_blank" rel="noopener">{store.label}<Icon name="arrowUpRight" /></a>
+      </div>
+    </div>
+    <a href={`/projects/${p.slug}`} class="b-media" tabindex="-1" aria-hidden="true" data-reveal>
+      <Picture
+        src={p.cover}
+        formats={["avif"]}
+        fallbackFormat="webp"
+        widths={[560, 840, 1120, 1400]}
+        sizes="(max-width: 960px) 100vw, 680px"
+        alt=""
+        loading={eager ? "eager" : "lazy"}
+        fetchpriority={eager ? "high" : "auto"}
+        style={`object-position:${position}`}
+      />
+    </a>
+  </div>
+</section>
+
+<style>
+  .band {
+    position: relative;
+    padding-block: clamp(48px, 7vw, 96px);
+    border-top: 1px solid var(--b-rule);
+  }
+  .band[data-band="prismo"]::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 4px;
+    background: var(--b-spectrum);
+  }
+  .band-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(28px, 5vw, 72px);
+    align-items: center;
+  }
+  .band:nth-of-type(even) .b-media {
+    order: -1;
+  }
+  .b-kicker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin-bottom: 18px;
+  }
+  .b-idx {
+    color: var(--b-accent);
+  }
+  .b-status::before {
+    content: "■ ";
+    color: var(--b-accent);
+  }
+  .b-name {
+    font-size: clamp(72px, 10vw, 148px);
+    line-height: 0.82;
+    margin-bottom: 20px;
+  }
+  .b-name a {
+    text-decoration: none;
+  }
+  .b-tag {
+    font-family: var(--serif);
+    font-size: clamp(19px, 1.8vw, 22px);
+    line-height: 1.42;
+    max-width: 30em;
+    margin-bottom: 26px;
+  }
+  .b-nums {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--b-rule);
+    border-bottom: 1px solid var(--b-rule);
+    margin-bottom: 18px;
+  }
+  .b-nums div {
+    padding: 12px 12px 14px 0;
+  }
+  .b-nums div + div {
+    padding-left: 12px;
+    border-left: 1px solid color-mix(in srgb, var(--b-rule) 25%, transparent);
+  }
+  .b-nums dd {
+    display: grid;
+    gap: 6px;
+  }
+  .b-num {
+    font-family: var(--display);
+    font-weight: 820;
+    font-stretch: 70%;
+    font-size: clamp(28px, 2.7vw, 38px);
+    line-height: 0.95;
+    white-space: nowrap;
+  }
+  .b-num-label {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.35;
+    color: var(--b-muted);
+  }
+  .b-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 26px;
+  }
+  .b-media {
+    display: block;
+    border: 1px solid color-mix(in srgb, var(--b-rule) 30%, transparent);
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    background: color-mix(in srgb, var(--b-ink) 6%, transparent);
+  }
+  .b-media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .band:hover .b-media :global(img) {
+    transform: scale(1.02);
+  }
+  @media (max-width: 960px) {
+    .band-grid {
+      grid-template-columns: 1fr;
+    }
+    .band:nth-of-type(even) .b-media {
+      order: 0;
+    }
+    .b-media {
+      order: -1;
+    }
+  }
+</style>
