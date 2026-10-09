@@ -41,6 +41,8 @@ const fontFaces = fallbackFaces + `
 
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Analytics from "../components/Analytics.astro";
+import ConsentBanner from "../components/ConsentBanner.astro";
 import { SITE_URL, profile } from "../data/profile";
 import { graph, personNode, websiteNode, pageNode, breadcrumbNode } from "../lib/schema";
 
@@ -142,6 +144,7 @@ const jsonLd = graph(
       })();
     </script>
 
+    <Analytics />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <slot name="head" />
   </head>
@@ -157,9 +160,19 @@ const jsonLd = graph(
             <slot />
           </main>
           <Footer />
+          <ConsentBanner />
         </>
       )
     }
+    <script>
+      // The CV download, as its own event (GA's automatic file_download depends on settings).
+      document.addEventListener("click", (e) => {
+        const a = (e.target as HTMLElement | null)?.closest?.("a[download], a[href$='.pdf']") as HTMLAnchorElement | null;
+        if (!a) return;
+        const w = window as unknown as { gtag?: (...args: unknown[]) => void };
+        w.gtag?.("event", "resume_download", { file: a.pathname });
+      });
+    </script>
     <script>
       // Fade sections in as they enter the viewport. Without JS everything is visible.
       const els = document.querySelectorAll<HTMLElement>("[data-reveal]");

@@ -110,9 +110,12 @@ const description =
         body: JSON.stringify({ name, email, message }),
       });
       if (!res.ok) throw new Error(String(res.status));
+      // The key event: a sent message (never its content).
+      (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag?.("event", "generate_lead", { form: "contact" });
       form.reset();
       setStatus("Thanks, your message is on its way. I'll get back to you soon.", "ok");
-    } catch {
+    } catch (err) {
+      (window as unknown as { Sentry?: { captureException: (e: unknown) => void } }).Sentry?.captureException(err);
       setStatus("Sorry, something went wrong. Please email me directly at contact@alexisthomas.fr.", "error");
     } finally {
       button!.disabled = false;
